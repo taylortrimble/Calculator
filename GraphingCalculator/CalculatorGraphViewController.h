@@ -1,17 +1,13 @@
 //
-//  CalculatorDetailViewController.h
+//  CalculatorGraphViewController.h
 //  GraphingCalculator
 //
-//  Created by Taylor Trimble on 1/26/12.
+//  Created by Taylor Trimble on 1/30/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface CalculatorGraphViewController : UIViewController <UISplitViewControllerDelegate>
-
-@property (strong, nonatomic) id detailItem;
-
-@property (strong, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
+@interface CalculatorGraphViewController : UIViewController
 
 @end
