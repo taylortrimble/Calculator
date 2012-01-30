@@ -180,6 +180,18 @@
         case 9:
             operation = CalculatorOperationSquareRoot;
             break;
+        
+        case 10:
+            operation = CalculatorOperationPower;
+            break;
+        
+        case 11:
+            operation = CalculatorOperationNaturalLog;
+            break;
+        
+        case 12:
+            operation = CalculatorOperationE;
+            break;
             
         default:
             operation = CalculatorOperationNull;

@@ -14,12 +14,15 @@ typedef enum _CalculatorOperation {
     CalculatorOperationSubtraction,
     CalculatorOperationMultiplication,
     CalculatorOperationDivision,
+    CalculatorOperationPower,
     CalculatorOperationNegation,
     CalculatorOperationTangent,
     CalculatorOperationSine,
     CalculatorOperationCosine,
-    CalculatorOperationSquareRoot,
-    CalculatorOperationPi
+    CalculatorOperationPi,
+    CalculatorOperationNaturalLog,
+    CalculatorOperationE,
+    CalculatorOperationSquareRoot
 } CalculatorOperation ;
 
 @interface CalculatorBrain : NSObject
