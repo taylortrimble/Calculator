@@ -182,6 +182,7 @@ typedef enum _CalculatorOperationPriority {
 - (void)undo
 {
     [self.program removeLastObject];
+    [self.operationIndexes removeIndex:[self.program count]];
 }
 
 #pragma mark - Variables
