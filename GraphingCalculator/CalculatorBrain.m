@@ -143,6 +143,17 @@ typedef enum _CalculatorOperationPriority {
                 
             case CalculatorOperationPi:
                 return M_PI;
+            
+            case CalculatorOperationE:
+                return M_E;
+            
+            case CalculatorOperationNaturalLog:
+                return log([self evaluateLastProgramItem]);
+                
+            case CalculatorOperationPower:
+                secondOperand = [self evaluateLastProgramItem];
+                firstOperand = [self evaluateLastProgramItem];
+                return pow(firstOperand, secondOperand);
                 
             default:
                 NSLog(@"Received invalid CalculatorOperation during program evaluation: %u", operation);
@@ -276,7 +287,7 @@ typedef enum _CalculatorOperationPriority {
                                            firstOperand,
                                            secondOperand
                                            ];
-                if ([self compareOperationPriority:CalculatorOperationPriorityAdditionAndSubtraction
+                if ([self compareOperationPriority:CalculatorOperationPriorityMultiplicationAndDivision
                              withOperationPriority:previousOperationPriority] == NSOrderedAscending) {
                     concatenation = [NSString stringWithFormat:@"(%@)", concatenation];
                 }
@@ -291,7 +302,7 @@ typedef enum _CalculatorOperationPriority {
                                            firstOperand,
                                            secondOperand
                                            ];
-                if ([self compareOperationPriority:CalculatorOperationPriorityAdditionAndSubtraction
+                if ([self compareOperationPriority:CalculatorOperationPriorityMultiplicationAndDivision
                              withOperationPriority:previousOperationPriority] == NSOrderedAscending) {
                     concatenation = [NSString stringWithFormat:@"(%@)", concatenation];
                 }
@@ -326,6 +337,28 @@ typedef enum _CalculatorOperationPriority {
             case CalculatorOperationPi:
                 return @"π";
                 
+            case CalculatorOperationE:
+                return @"e";
+            
+            case CalculatorOperationNaturalLog:
+                return [NSString stringWithFormat:@"ln(%@)",
+                        [self stringForProgramItemWithPreviousOperationPriority:CalculatorOperationPriorityFunction]
+                        ];
+            
+            case CalculatorOperationPower:
+                secondOperand = [self stringForProgramItemWithPreviousOperationPriority:CalculatorOperationPriorityExponential];
+                firstOperand = [self stringForProgramItemWithPreviousOperationPriority:CalculatorOperationPriorityExponential];
+                concatenation = [NSString stringWithFormat:@"%@^%@",
+                                 firstOperand,
+                                 secondOperand
+                                 ];
+                if ([self compareOperationPriority:CalculatorOperationPriorityExponential
+                             withOperationPriority:previousOperationPriority] == NSOrderedAscending) {
+                    concatenation = [NSString stringWithFormat:@"(%@)", concatenation];
+                }
+                
+                return concatenation;
+            
             default:
                 NSLog(@"Received invalid CalculatorOperation during program transcription: %u", operation);
                 return @"";
