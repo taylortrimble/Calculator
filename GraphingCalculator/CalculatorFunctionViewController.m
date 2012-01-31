@@ -162,6 +162,6 @@
 
 - (IBAction)cancelPressed:(UIBarButtonItem *)sender
 {
-#warning Must push back to previous view controller
+    [(UIViewController *)self.delegate dismissModalViewControllerAnimated:YES];
 }
 @end
