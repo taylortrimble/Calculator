@@ -85,7 +85,7 @@
 {
     if ([segue.identifier isEqualToString:@"PresentFunctionViewController"]) {
         [(CalculatorFunctionViewController *)[segue.destinationViewController rootViewController] setDelegate:self];
-        [(CalculatorFunctionViewController *)[segue.destinationViewController rootViewController] setFunctions:self.brain.functions];
+        [(CalculatorFunctionViewController *)[segue.destinationViewController rootViewController] setCalculatorBrain:self.brain];
     }
 }
 

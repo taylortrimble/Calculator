@@ -30,7 +30,7 @@
 #pragma mark - Properties
 
 @synthesize delegate = _delegate;
-@synthesize functions = _functions;
+@synthesize calculatorBrain = _calculatorBrain;
 
 #pragma mark - View lifecycle
 

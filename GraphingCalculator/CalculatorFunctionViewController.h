@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CalculatorBrain.h"
 
 @protocol CalculatorFunctionViewControllerDelegate;
 
 @interface CalculatorFunctionViewController : UITableViewController
 
 @property (nonatomic, weak) id <CalculatorFunctionViewControllerDelegate> delegate;
-@property (nonatomic, weak) NSArray *functions;
+@property (nonatomic, weak) CalculatorBrain *calculatorBrain;
 
 - (IBAction)cancelPressed:(UIBarButtonItem *)sender;
 
