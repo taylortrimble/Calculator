@@ -15,7 +15,7 @@
 
 - (NSArray *)functions
 {
-    if (!_functions || [_functions count]) {
+    if (!_functions || ![_functions count]) {
         CalculatorFunction *newFunction = [[CalculatorFunction alloc] initWithTitle:@"f1"];
         _functions = [NSArray arrayWithObject:newFunction];
     }
