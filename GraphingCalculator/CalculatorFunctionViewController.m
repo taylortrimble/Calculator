@@ -101,6 +101,10 @@
     
     cell.textLabel.text = [[self.calculatorBrain.functions objectAtIndex:indexPath.row] title];
     cell.detailTextLabel.text = [[self.calculatorBrain.functions objectAtIndex:indexPath.row] programDescription];
+    if ([self.calculatorBrain.functions objectAtIndex:indexPath.row] ==
+        self.calculatorBrain.activeFunction) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
     
     return cell;
 }
