@@ -103,9 +103,9 @@
 
 - (IBAction)enterPressed
 {
-    [self.brain pushOperand:[self.display.text doubleValue]];
+    [self.brain.activeFunction pushOperand:[self.display.text doubleValue]];
     self.userIsCurrentlyEnteringData = NO;
-    self.historyDisplay.text = [self.brain programDescription];
+    self.historyDisplay.text = [self.brain.activeFunction programDescription];
 }
 
 - (IBAction)decimalPressed
@@ -200,7 +200,7 @@
             break;
     }
     
-    [self.brain pushOperation:operation];
+    [self.brain.activeFunction pushOperation:operation];
     [self updateDisplay];
 }
 
@@ -209,20 +209,20 @@
     if (self.userIsCurrentlyEnteringData) {
         [self enterPressed];
     }
-    [self.brain pushVariable:[sender currentTitle]];
+    [self.brain.activeFunction pushVariable:[sender currentTitle]];
     [self updateDisplay];
 }
 
 - (IBAction)clearPressed
 {
-    [self.brain clear];
+    [self.brain.activeFunction clear];
     [self updateDisplay];
 }
 
 - (IBAction)undoPressed
 {
     if (!self.userIsCurrentlyEnteringData) {
-        [self.brain undo];
+        [self.brain.activeFunction undo];
         [self updateDisplay];
     } else {
         if ([self.display.text length]) {
@@ -236,11 +236,13 @@
 
 - (void)updateDisplay
 {
-    self.display.text = [NSString stringWithFormat:@"%g", [self.brain runProgram]];
+    self.display.text = [NSString stringWithFormat:@"%g",
+                         [self.brain.activeFunction runProgram]
+                         ];
     if ([self.display.text isEqualToString:@""]) {
         self.display.text = @"0";
     }
-    self.historyDisplay.text = [self.brain programDescription];
+    self.historyDisplay.text = [self.brain.activeFunction programDescription];
 }
 
 @end

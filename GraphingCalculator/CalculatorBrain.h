@@ -1,46 +1,17 @@
 //
 //  CalculatorBrain.h
-//  Calculator
+//  GraphingCalculator
 //
-//  Created by Taylor Trimble on 1/9/12.
+//  Created by Taylor Trimble on 1/31/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-
-typedef enum _CalculatorOperation {
-    CalculatorOperationNull,
-    CalculatorOperationAddition,
-    CalculatorOperationSubtraction,
-    CalculatorOperationMultiplication,
-    CalculatorOperationDivision,
-    CalculatorOperationPower,
-    CalculatorOperationNegation,
-    CalculatorOperationTangent,
-    CalculatorOperationSine,
-    CalculatorOperationCosine,
-    CalculatorOperationPi,
-    CalculatorOperationNaturalLog,
-    CalculatorOperationE,
-    CalculatorOperationSquareRoot
-} CalculatorOperation ;
+#import "CalculatorFunction.h"
 
 @interface CalculatorBrain : NSObject
 
-@property (nonatomic, strong, readonly) NSMutableDictionary *variables;
-
-- (void)pushOperand:(double)operand;
-- (void)pushVariable:(NSString *)variable;
-- (void)pushOperation:(CalculatorOperation)operation;
-
-- (void)undo;
-
-- (void)defineVariables:(NSDictionary *)variables;
-- (double)valueForVariable:(NSString *)variable;
-
-- (double)runProgram;
-- (NSString *)programDescription;
-
-- (void)clear;
+@property (nonatomic, strong) NSArray *functions;
+@property (nonatomic, weak) CalculatorFunction *activeFunction;
 
 @end
