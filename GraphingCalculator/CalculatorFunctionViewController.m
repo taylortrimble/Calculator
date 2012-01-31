@@ -42,7 +42,7 @@
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+     self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)viewDidUnload
@@ -107,6 +107,16 @@
     }
     
     return cell;
+}
+
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated
+{
+    [super setEditing:editing animated:animated];
+    if (editing) {
+        NSLog(@"Whoo!");
+    } else {
+        NSLog(@"Hya!");
+    }
 }
 
 /*
