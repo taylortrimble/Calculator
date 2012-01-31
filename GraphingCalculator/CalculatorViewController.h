@@ -19,7 +19,7 @@
 - (IBAction)digitPressed:(UIButton *)sender;
 - (IBAction)enterPressed;
 - (IBAction)decimalPressed;
-- (IBAction)negationPressed:(id)sender;
+- (IBAction)negationPressed:(UIButton *)sender;
 - (IBAction)operationPressed:(UIButton *)sender;
 - (IBAction)variablePressed:(UIButton *)sender;
 - (IBAction)clearPressed;
