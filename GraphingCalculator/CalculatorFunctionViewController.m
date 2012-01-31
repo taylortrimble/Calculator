@@ -29,6 +29,7 @@
 
 #pragma mark - Properties
 
+@synthesize delegate = _delegate;
 @synthesize functions = _functions;
 
 #pragma mark - View lifecycle
@@ -159,4 +160,8 @@
      */
 }
 
+- (IBAction)cancelPressed:(UIBarButtonItem *)sender
+{
+#warning Must push back to previous view controller
+}
 @end

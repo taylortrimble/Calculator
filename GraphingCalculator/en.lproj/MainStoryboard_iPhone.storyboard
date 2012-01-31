@@ -577,7 +577,7 @@
         <scene sceneID="Esk-nP-7iU">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RHh-In-bwu" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="65o-pG-i1x" sceneMemberID="viewController">
+                <tableViewController id="65o-pG-i1x" customClass="CalculatorFunctionViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="l4b-ti-hFM">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -615,7 +615,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Functions" id="JAc-Z2-j0j">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="430-Aw-we0"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="hgh-Ql-neu">
+                            <connections>
+                                <action selector="cancelPressed:" destination="65o-pG-i1x" id="XPs-9c-IsR"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="430-Aw-we0"/>
                     </navigationItem>
                 </tableViewController>
             </objects>

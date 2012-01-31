@@ -7,8 +7,9 @@
 //
 
 #import "CalculatorViewController.h"
+#import "CalculatorFunctionViewController.h"
 
-@interface CalculatorViewController()
+@interface CalculatorViewController() <CalculatorFunctionViewControllerDelegate>
 
 - (void)updateDisplay;
 
@@ -83,7 +84,8 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"PresentFunctionViewController"]) {
-        NSLog(@"Function");
+        [(CalculatorFunctionViewController *)[segue.destinationViewController rootViewController] setDelegate:self];
+        [(CalculatorFunctionViewController *)[segue.destinationViewController rootViewController] setFunctions:self.brain.functions];
     }
 }
 

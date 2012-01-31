@@ -8,8 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol CalculatorFunctionViewControllerDelegate;
+
 @interface CalculatorFunctionViewController : UITableViewController
 
+@property (nonatomic, weak) id <CalculatorFunctionViewControllerDelegate> delegate;
 @property (nonatomic, weak) NSArray *functions;
+
+- (IBAction)cancelPressed:(UIBarButtonItem *)sender;
+
+
+@end
+
+
+@protocol CalculatorFunctionViewControllerDelegate <NSObject>
+
 
 @end
