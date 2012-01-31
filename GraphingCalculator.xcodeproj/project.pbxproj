@@ -18,6 +18,7 @@
 		1024188D14D2445500E0881F /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1024188B14D2445500E0881F /* MainStoryboard_iPad.storyboard */; };
 		1042188914D755FE00A48E7E /* CalculatorVariablesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1042188814D755FE00A48E7E /* CalculatorVariablesViewController.m */; };
 		1042188F14D7904800A48E7E /* CalculatorVariablesDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1042188E14D7904800A48E7E /* CalculatorVariablesDetailViewController.m */; };
+		1050C6B014D7C3970077F204 /* CalculatorFunctionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1050C6AF14D7C3970077F204 /* CalculatorFunctionViewController.m */; };
 		109C3EFA14D748E500B543D6 /* CalculatorBrain.m in Sources */ = {isa = PBXBuildFile; fileRef = 109C3EF714D748E500B543D6 /* CalculatorBrain.m */; };
 		109C3EFB14D748E500B543D6 /* CalculatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 109C3EF914D748E500B543D6 /* CalculatorViewController.m */; };
 		109C3EFE14D74AE700B543D6 /* CalculatorViewControllerIpad.m in Sources */ = {isa = PBXBuildFile; fileRef = 109C3EFD14D74AE700B543D6 /* CalculatorViewControllerIpad.m */; };
@@ -42,6 +43,8 @@
 		1042188814D755FE00A48E7E /* CalculatorVariablesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorVariablesViewController.m; sourceTree = "<group>"; };
 		1042188D14D7904800A48E7E /* CalculatorVariablesDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorVariablesDetailViewController.h; sourceTree = "<group>"; };
 		1042188E14D7904800A48E7E /* CalculatorVariablesDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorVariablesDetailViewController.m; sourceTree = "<group>"; };
+		1050C6AE14D7C3970077F204 /* CalculatorFunctionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorFunctionViewController.h; sourceTree = "<group>"; };
+		1050C6AF14D7C3970077F204 /* CalculatorFunctionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorFunctionViewController.m; sourceTree = "<group>"; };
 		109C3EF614D748E500B543D6 /* CalculatorBrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorBrain.h; sourceTree = "<group>"; };
 		109C3EF714D748E500B543D6 /* CalculatorBrain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorBrain.m; sourceTree = "<group>"; };
 		109C3EF814D748E500B543D6 /* CalculatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorViewController.h; sourceTree = "<group>"; };
@@ -98,6 +101,8 @@
 				1024188614D2445500E0881F /* CalculatorAppDelegate.m */,
 				1021BFC414D75033002E8BE4 /* CalculatorGraphViewController.h */,
 				1021BFC514D75033002E8BE4 /* CalculatorGraphViewController.m */,
+				1050C6AE14D7C3970077F204 /* CalculatorFunctionViewController.h */,
+				1050C6AF14D7C3970077F204 /* CalculatorFunctionViewController.m */,
 				1042188714D755FE00A48E7E /* CalculatorVariablesViewController.h */,
 				1042188814D755FE00A48E7E /* CalculatorVariablesViewController.m */,
 				1042188D14D7904800A48E7E /* CalculatorVariablesDetailViewController.h */,
@@ -213,6 +218,7 @@
 				1021BFC614D75034002E8BE4 /* CalculatorGraphViewController.m in Sources */,
 				1042188914D755FE00A48E7E /* CalculatorVariablesViewController.m in Sources */,
 				1042188F14D7904800A48E7E /* CalculatorVariablesDetailViewController.m in Sources */,
+				1050C6B014D7C3970077F204 /* CalculatorFunctionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

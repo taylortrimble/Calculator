@@ -82,7 +82,9 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Configure destination view controller
+    if ([segue.identifier isEqualToString:@"PresentFunctionViewController"]) {
+        NSLog(@"Function");
+    }
 }
 
 #pragma mark - Button presses

@@ -413,7 +413,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="UYb-U0-rtB" kind="modal" identifier="PresentFuntionViewController" id="tC4-Jm-jld"/>
+                                    <segue destination="UYb-U0-rtB" kind="modal" identifier="PresentFunctionViewController" id="tC4-Jm-jld"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vs1-ow-URY">
@@ -615,7 +615,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Functions" id="JAc-Z2-j0j">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="dlD-I9-Giz"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="430-Aw-we0"/>
                     </navigationItem>
                 </tableViewController>
             </objects>
@@ -831,32 +831,6 @@
             <point key="canvasLocation" x="2537" y="-508"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="CalculatorGraphViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CalculatorGraphViewController.h"/>
-        </class>
-        <class className="CalculatorVariablesDetailViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CalculatorVariablesDetailViewController.h"/>
-        </class>
-        <class className="CalculatorVariablesViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CalculatorVariablesViewController.h"/>
-        </class>
-        <class className="CalculatorViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CalculatorViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="clearPressed"/>
-                <relationship kind="action" name="decimalPressed"/>
-                <relationship kind="action" name="digitPressed:" candidateClass="UIButton"/>
-                <relationship kind="action" name="enterPressed"/>
-                <relationship kind="action" name="negationPressed:" candidateClass="UIButton"/>
-                <relationship kind="action" name="operationPressed:" candidateClass="UIButton"/>
-                <relationship kind="action" name="undoPressed"/>
-                <relationship kind="action" name="variablePressed:" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="display" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="historyDisplay" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -22,7 +22,8 @@
 - (IBAction)negationPressed:(UIButton *)sender;
 - (IBAction)operationPressed:(UIButton *)sender;
 - (IBAction)variablePressed:(UIButton *)sender;
-- (IBAction)clearPressed;
+
+- (IBAction)clearPressed;           // Deprecated
 - (IBAction)undoPressed;
 
 @end
