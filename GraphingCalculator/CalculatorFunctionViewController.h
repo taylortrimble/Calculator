@@ -15,9 +15,7 @@
 @interface CalculatorFunctionViewController : UITableViewController
 
 @property (nonatomic, weak) id <CalculatorFunctionViewControllerDelegate> delegate;
-@property (nonatomic, strong) CalculatorBrain *calculatorBrain;
-
-- (IBAction)cancelPressed:(UIBarButtonItem *)sender;
+@property (nonatomic, weak) CalculatorBrain *calculatorBrain;
 
 
 @end

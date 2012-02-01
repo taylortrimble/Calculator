@@ -32,15 +32,6 @@
 @synthesize delegate = _delegate;
 @synthesize calculatorBrain = _calculatorBrain;
 
-- (CalculatorBrain *)calculatorBrain
-{
-    if (!_calculatorBrain) {
-        _calculatorBrain = [[CalculatorBrain alloc] init];
-    }
-    
-    return _calculatorBrain;
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -182,8 +173,4 @@
     self.calculatorBrain.activeFunction = [self.calculatorBrain.functions objectAtIndex:indexPath.row];
 }
 
-- (IBAction)cancelPressed:(UIBarButtonItem *)sender
-{
-    [(UIViewController *)self.delegate dismissModalViewControllerAnimated:YES];
-}
 @end
