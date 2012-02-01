@@ -22,15 +22,6 @@
 @synthesize brain = _brain;
 @synthesize userIsCurrentlyEnteringData = _userIsCurrentlyEnteringData;
 
-- (CalculatorBrain *)brain
-{
-    if (!_brain) {
-        _brain = [[CalculatorBrain alloc] init];
-    }
-    
-    return _brain;
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

@@ -13,7 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *display;
 @property (weak, nonatomic) IBOutlet UILabel *historyDisplay;
-@property (strong, nonatomic) CalculatorBrain *brain;
+@property (weak, nonatomic) CalculatorBrain *brain;
 @property BOOL userIsCurrentlyEnteringData;
 
 - (IBAction)digitPressed:(UIButton *)sender;

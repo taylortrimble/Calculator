@@ -32,6 +32,15 @@
 @synthesize delegate = _delegate;
 @synthesize calculatorBrain = _calculatorBrain;
 
+- (CalculatorBrain *)calculatorBrain
+{
+    if (!_calculatorBrain) {
+        _calculatorBrain = [[CalculatorBrain alloc] init];
+    }
+    
+    return _calculatorBrain;
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -121,9 +130,7 @@
 {
     [super setEditing:editing animated:animated];
     if (editing) {
-        NSLog(@"Whoo!");
     } else {
-        NSLog(@"Hya!");
     }
 }
 
