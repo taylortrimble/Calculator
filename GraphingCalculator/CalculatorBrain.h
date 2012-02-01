@@ -14,4 +14,6 @@
 @property (nonatomic, strong) NSArray *functions;
 @property (nonatomic, weak) CalculatorFunction *activeFunction;
 
+- (void)addNewFunctionWithTitle:(NSString *)title setAsActive:(BOOL)active;
+
 @end

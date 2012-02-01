@@ -33,6 +33,13 @@
     return _activeFunction;
 }
 
-#pragma mark - Forwarded messages
+- (void)addNewFunctionWithTitle:(NSString *)title setAsActive:(BOOL)active
+{
+    self.functions = [self.functions arrayByAddingObject:
+                      [[CalculatorFunction alloc]initWithTitle:title]];
+    if (active) {
+        self.activeFunction = [self.functions lastObject];
+    }
+}
 
 @end
