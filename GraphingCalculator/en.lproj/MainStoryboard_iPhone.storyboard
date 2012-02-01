@@ -16,11 +16,11 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="45C-HO-1TO" kind="relationship" relationship="rootViewController" id="Uiy-Z4-6K2"/>
+                        <segue destination="65o-pG-i1x" kind="relationship" relationship="rootViewController" id="dEE-lj-1RX"/>
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="59" y="76"/>
+            <point key="canvasLocation" x="-369" y="79"/>
         </scene>
         <scene sceneID="OZu-1M-5Fh">
             <objects>
@@ -412,9 +412,6 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="UYb-U0-rtB" kind="modal" identifier="PresentFunctionViewController" id="tC4-Jm-jld"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vs1-ow-URY">
                                 <rect key="frame" x="20" y="56" width="64" height="37"/>
@@ -583,11 +580,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FunctionCell" textLabel="Ohl-qa-YF6" detailTextLabel="jsG-Eg-TaQ" style="IBUITableViewCellStyleSubtitle" id="YUB-6h-OT6">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FunctionCell" textLabel="Ohl-qa-YF6" detailTextLabel="jsG-Eg-TaQ" style="IBUITableViewCellStyleSubtitle" id="YUB-6h-OT6">
                                 <rect key="frame" x="0.0" y="46" width="320" height="46"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="10" y="1" width="300" height="43"/>
+                                    <rect key="frame" x="10" y="1" width="280" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ohl-qa-YF6">
@@ -607,6 +604,9 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <connections>
+                                    <segue destination="45C-HO-1TO" kind="push" identifier="PushCalculatorViewController" id="7J2-2i-qtQ"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -614,16 +614,10 @@
                             <outlet property="delegate" destination="65o-pG-i1x" id="VGe-zU-4Kj"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Functions" id="JAc-Z2-j0j">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="hgh-Ql-neu">
-                            <connections>
-                                <action selector="cancelPressed:" destination="65o-pG-i1x" id="XPs-9c-IsR"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Functions" id="JAc-Z2-j0j"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="1531" y="748"/>
+            <point key="canvasLocation" x="67" y="79"/>
         </scene>
         <scene sceneID="c2e-Da-kcJ">
             <objects>
@@ -737,23 +731,6 @@
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="2537" y="-1106"/>
-        </scene>
-        <scene sceneID="3ZL-gV-bfN">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="oVz-K8-CBe" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController id="UYb-U0-rtB" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="TQW-Ss-qij">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="65o-pG-i1x" kind="relationship" relationship="rootViewController" id="eQv-oy-NmK"/>
-                    </connections>
-                </navigationController>
-            </objects>
-            <point key="canvasLocation" x="1005" y="748"/>
         </scene>
         <scene sceneID="ASa-l2-EkA">
             <objects>

@@ -32,6 +32,15 @@
 @synthesize delegate = _delegate;
 @synthesize calculatorBrain = _calculatorBrain;
 
+- (CalculatorBrain *)calculatorBrain
+{
+    if (!_calculatorBrain) {
+        _calculatorBrain = [[CalculatorBrain alloc] init];
+    }
+    
+    return _calculatorBrain;
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -55,6 +64,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.tableView reloadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -76,6 +86,13 @@
 {
     // Return YES for supported orientations
 	return YES;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"PushCalculatorViewController"]) {
+        [segue.destinationViewController setBrain:self.calculatorBrain];
+    }
 }
 
 #pragma mark - Table view data source
@@ -162,13 +179,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    self.calculatorBrain.activeFunction = [self.calculatorBrain.functions objectAtIndex:indexPath.row];
 }
 
 - (IBAction)cancelPressed:(UIBarButtonItem *)sender

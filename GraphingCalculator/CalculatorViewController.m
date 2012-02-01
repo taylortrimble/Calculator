@@ -83,10 +83,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"PresentFunctionViewController"]) {
-        [(CalculatorFunctionViewController *)[segue.destinationViewController topViewController] setDelegate:self];
-        [(CalculatorFunctionViewController *)[segue.destinationViewController topViewController] setCalculatorBrain:self.brain];
-    }
+    // Segue stuff
 }
 
 #pragma mark - Button presses
