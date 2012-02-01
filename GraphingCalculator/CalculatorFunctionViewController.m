@@ -98,36 +98,70 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    if (self.isEditing) {
+        return 2;
+    } else {
+        return 1;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.calculatorBrain.functions count];
+    switch (section) {
+        case 0:
+            return [self.calculatorBrain.functions count];
+        
+        case 1:
+            return 1;
+            
+        default:
+            return 0;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"FunctionCell";
+    static NSString *cellIdentifier = @"";
+    UITableViewCell *cell = nil;
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    switch (indexPath.section) {
+        case 0:
+            cellIdentifier = @"FunctionCell";
+            
+            cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+            if (cell == nil) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+            }
+            
+            cell.textLabel.text = [[self.calculatorBrain.functions objectAtIndex:indexPath.row] title];
+            cell.detailTextLabel.text = [[self.calculatorBrain.functions objectAtIndex:indexPath.row] programDescription];
+            if ([self.calculatorBrain.functions objectAtIndex:indexPath.row] ==
+                self.calculatorBrain.activeFunction) {
+                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            }
+            
+            return cell;
+        
+        case 1:
+            cellIdentifier = @"AddNewFunctionCell";
+            
+            cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+            if (cell == nil) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+            }
+            
+            return cell;
+            
+        default:
+            return nil;
     }
-    
-    cell.textLabel.text = [[self.calculatorBrain.functions objectAtIndex:indexPath.row] title];
-    cell.detailTextLabel.text = [[self.calculatorBrain.functions objectAtIndex:indexPath.row] programDescription];
-    if ([self.calculatorBrain.functions objectAtIndex:indexPath.row] ==
-        self.calculatorBrain.activeFunction) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    }
-    
-    return cell;
 }
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
     [super setEditing:editing animated:animated];
+    [self.tableView setEditing:editing animated:animated];
+    
     if (editing) {
     } else {
     }
