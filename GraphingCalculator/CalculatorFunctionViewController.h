@@ -10,18 +10,9 @@
 #import "CalculatorBrain.h"
 #import "CalculatorViewController.h"
 
-@protocol CalculatorFunctionViewControllerDelegate;
-
 @interface CalculatorFunctionViewController : UITableViewController
 
-@property (nonatomic, weak) id <CalculatorFunctionViewControllerDelegate> delegate;
 @property (nonatomic, strong) CalculatorBrain *calculatorBrain;
-
-
-@end
-
-
-@protocol CalculatorFunctionViewControllerDelegate <NSObject>
 
 
 @end

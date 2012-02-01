@@ -29,7 +29,6 @@
 
 #pragma mark - Properties
 
-@synthesize delegate = _delegate;
 @synthesize calculatorBrain = _calculatorBrain;
 
 - (CalculatorBrain *)calculatorBrain

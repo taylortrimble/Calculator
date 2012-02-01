@@ -7,9 +7,8 @@
 //
 
 #import "CalculatorViewController.h"
-#import "CalculatorFunctionViewController.h"
 
-@interface CalculatorViewController() <CalculatorFunctionViewControllerDelegate>
+@interface CalculatorViewController()
 
 - (void)updateDisplay;
 
