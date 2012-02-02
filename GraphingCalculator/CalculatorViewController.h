@@ -23,7 +23,7 @@
 - (IBAction)operationPressed:(UIButton *)sender;
 - (IBAction)variablePressed:(UIButton *)sender;
 
-- (IBAction)clearPressed;           // Deprecated
+- (IBAction)clearPressed;
 - (IBAction)undoPressed;
 
 @end
