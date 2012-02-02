@@ -135,10 +135,6 @@
             
             cell.textLabel.text = [[self.calculatorBrain.functions objectAtIndex:indexPath.row] title];
             cell.detailTextLabel.text = [[self.calculatorBrain.functions objectAtIndex:indexPath.row] programDescription];
-            if ([self.calculatorBrain.functions objectAtIndex:indexPath.row] ==
-                self.calculatorBrain.activeFunction) {
-                cell.accessoryType = UITableViewCellAccessoryCheckmark;
-            }
             
             return cell;
         
@@ -176,17 +172,38 @@
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
-    return YES;
+    if ([self.calculatorBrain.functions count] > 1 || indexPath.section != 0) {
+        return YES;
+    } else {
+        return NO; 
+    }
 }
 */
 
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView
+           editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    switch (indexPath.section) {
+        case 0:
+            if ([self.calculatorBrain.functions count] > 1) {
+                return UITableViewCellEditingStyleDelete;
+            } else {
+                return UITableViewCellEditingStyleNone;
+            }
+            
+        case 1:
+            return UITableViewCellEditingStyleInsert;
+            
+        default:
+            return UITableViewCellEditingStyleNone;
+    }
+}
 
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-#warning Delete will fail if there is only one function.
         NSMutableArray *mutableCopyOfFunctions = [self.calculatorBrain.functions mutableCopy];
         [mutableCopyOfFunctions removeObject:[self.calculatorBrain.functions objectAtIndex:indexPath.row]];
         self.calculatorBrain.functions = [mutableCopyOfFunctions copy];
@@ -220,21 +237,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     self.calculatorBrain.activeFunction = [self.calculatorBrain.functions objectAtIndex:indexPath.row];
-}
-
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView
-           editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    switch (indexPath.section) {
-        case 0:
-            return UITableViewCellEditingStyleDelete;
-            
-        case 1:
-            return UITableViewCellEditingStyleInsert;
-            
-        default:
-            return UITableViewCellEditingStyleNone;
-    }
 }
 
 @end
