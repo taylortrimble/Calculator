@@ -213,4 +213,19 @@
     self.calculatorBrain.activeFunction = [self.calculatorBrain.functions objectAtIndex:indexPath.row];
 }
 
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView
+           editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    switch (indexPath.section) {
+        case 0:
+            return UITableViewCellEditingStyleDelete;
+            
+        case 1:
+            return UITableViewCellEditingStyleInsert;
+            
+        default:
+            return UITableViewCellEditingStyleNone;
+    }
+}
+
 @end
