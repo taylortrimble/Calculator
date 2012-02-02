@@ -101,7 +101,7 @@
     if (self.isEditing) {
         return 2;
     } else {
-        return 2;
+        return 1;
     }
 }
 
@@ -112,9 +112,7 @@
             return [self.calculatorBrain.functions count];
         
         case 1:
-            if (self.isEditing) {
-                return 1;
-            }
+            return 1;
             
         default:
             return 0;
@@ -162,9 +160,15 @@
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
     [super setEditing:editing animated:animated];
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1]
-                  withRowAnimation:UITableViewRowAnimationAutomatic
-     ];
+    if (self.editing) {
+        [self.tableView insertSections:[NSIndexSet indexSetWithIndex:1]
+                      withRowAnimation:UITableViewRowAnimationAutomatic
+         ];
+    } else {
+        [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:1]
+                      withRowAnimation:UITableViewRowAnimationAutomatic
+         ];
+    }
 }
 
 /*
@@ -176,19 +180,24 @@
 }
 */
 
-/*
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+#warning Delete will fail if there is only one function.
+        NSMutableArray *mutableCopyOfFunctions = [self.calculatorBrain.functions mutableCopy];
+        [mutableCopyOfFunctions removeObject:[self.calculatorBrain.functions objectAtIndex:indexPath.row]];
+        self.calculatorBrain.functions = [mutableCopyOfFunctions copy];
+        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }   
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        [self.calculatorBrain addNewFunctionWithTitle:@"newFunc" setAsActive:YES];
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.row] withRowAnimation:UITableViewRowAnimationAutomatic];
     }   
 }
-*/
 
 /*
 // Override to support rearranging the table view.
