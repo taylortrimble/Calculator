@@ -94,6 +94,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"PushCalculatorViewController"]) {
+        self.calculatorBrain.activeFunction = [self.calculatorBrain.functions objectAtIndex:[self.tableView indexPathForSelectedRow ].row];
         [segue.destinationViewController setBrain:self.calculatorBrain];
     }
 }
@@ -257,7 +258,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.calculatorBrain.activeFunction = [self.calculatorBrain.functions objectAtIndex:indexPath.row];
+//    self.calculatorBrain.activeFunction = [self.calculatorBrain.functions objectAtIndex:indexPath.row];
 }
 
 @end
