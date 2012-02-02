@@ -8,6 +8,10 @@
 
 #import "CalculatorFunctionViewController.h"
 
+
+@interface CalculatorFunctionViewController() <UITextFieldDelegate>
+@end
+
 @implementation CalculatorFunctionViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -146,6 +150,8 @@
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
             }
             
+            [(UITextField *)[cell viewWithTag:1] setText:@"add new function"];
+            
             return cell;
             
         default:
@@ -211,9 +217,24 @@
     }   
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        [self.calculatorBrain addNewFunctionWithTitle:@"newFunc" setAsActive:YES];
-        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.row] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [(UITextField *)[[tableView cellForRowAtIndexPath:indexPath] viewWithTag:1] setDelegate:self];
+        [[[tableView cellForRowAtIndexPath:indexPath] viewWithTag:1] becomeFirstResponder];
     }   
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    [self.calculatorBrain addNewFunctionWithTitle:textField.text setAsActive:NO];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
+                  withRowAnimation:UITableViewRowAnimationAutomatic
+     ];
+    self.editing = NO;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField endEditing:YES];
+    return YES;
 }
 
 /*
