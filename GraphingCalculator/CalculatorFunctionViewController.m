@@ -101,7 +101,7 @@
     if (self.isEditing) {
         return 2;
     } else {
-        return 1;
+        return 2;
     }
 }
 
@@ -112,7 +112,9 @@
             return [self.calculatorBrain.functions count];
         
         case 1:
-            return 1;
+            if (self.isEditing) {
+                return 1;
+            }
             
         default:
             return 0;
@@ -160,11 +162,9 @@
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
     [super setEditing:editing animated:animated];
-    [self.tableView setEditing:editing animated:animated];
-    
-    if (editing) {
-    } else {
-    }
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1]
+                  withRowAnimation:UITableViewRowAnimationAutomatic
+     ];
 }
 
 /*
