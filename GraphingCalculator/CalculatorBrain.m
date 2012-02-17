@@ -35,6 +35,10 @@
 
 - (void)addNewFunctionWithTitle:(NSString *)title setAsActive:(BOOL)active
 {
+    if ([title isEqualToString:@""]) {
+        title = @"new";
+    }
+    
     self.functions = [self.functions arrayByAddingObject:
                       [[CalculatorFunction alloc]initWithTitle:title]];
     if (active) {
