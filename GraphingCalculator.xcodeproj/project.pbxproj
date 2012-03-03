@@ -178,7 +178,7 @@
 		1024186914D2445500E0881F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0440;
 			};
 			buildConfigurationList = 1024186C14D2445500E0881F /* Build configuration list for PBXProject "GraphingCalculator" */;
 			compatibilityVersion = "Xcode 3.2";

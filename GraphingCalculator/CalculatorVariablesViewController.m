@@ -7,6 +7,12 @@
 //
 
 #import "CalculatorVariablesViewController.h"
+#import "CalculatorVariablesDetailViewController.h"
+
+@interface CalculatorVariablesViewController () <CalculatorVariablesDetailViewControllerDelegate>
+
+@end
+
 
 @implementation CalculatorVariablesViewController
 
@@ -30,6 +36,7 @@
 #pragma mark - Accessors
 
 @synthesize variables = _variables;
+@synthesize delegate = _delegate;
 
 #pragma mark - View lifecycle
 
@@ -54,6 +61,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
+                  withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -75,6 +84,15 @@
 {
     // Return YES for supported orientations
 	return YES;
+}
+
+#pragma mark Segues
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"PresentVariablesDetailViewController"]) {
+        [(CalculatorVariablesDetailViewController *)[segue.destinationViewController topViewController] setDelegate:self];
+    }
 }
 
 #pragma mark - Table view data source
@@ -101,6 +119,8 @@
     
     NSArray *variableNames = [self.variables allKeys];
     cell.textLabel.text = [variableNames objectAtIndex:indexPath.row];
+    
+    cell.detailTextLabel.text = [[self.variables valueForKey:[variableNames objectAtIndex:indexPath.row]] stringValue];
     
     return cell;
 }
@@ -155,6 +175,23 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+    
+    [self.delegate selectVariable:[[self.variables allKeys] objectAtIndex:indexPath.row]];
+}
+
+#pragma mark - Variables Detail View Controller Delegate
+
+- (void)defineVariables:(NSDictionary *)variables
+{
+    [self.delegate defineVariables:variables];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - Button Methods
+
+- (IBAction)cancelButtonPressed:(id)sender
+{
+    [self.delegate dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

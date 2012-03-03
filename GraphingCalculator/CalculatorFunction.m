@@ -67,7 +67,7 @@ typedef enum _CalculatorOperationPriority {
 - (NSString *)title
 {
     if (!_title) {
-        _title = @"f1";
+        _title = @"Function";
     }
     
     return _title;

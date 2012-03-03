@@ -7,8 +7,9 @@
 //
 
 #import "CalculatorViewController.h"
+#import "CalculatorVariablesViewController.h"
 
-@interface CalculatorViewController()
+@interface CalculatorViewController() <CalculatorVariablesViewControllerDelegate>
 
 - (void)updateDisplay;
 
@@ -74,7 +75,23 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Segue stuff
+    if ([segue.identifier isEqualToString:@"PresentVariablesViewController"]) {
+        [(CalculatorVariablesViewController *)[segue.destinationViewController topViewController] setDelegate:self];
+        [(CalculatorVariablesViewController *)[segue.destinationViewController topViewController] setVariables:self.brain.activeFunction.variables];
+    }
+}
+
+#pragma mark - Variables View Controller Delegate
+
+- (void)defineVariables:(NSDictionary *)variables
+{
+    [self.brain.activeFunction defineVariables:variables];
+}
+
+- (void)selectVariable:(NSString *)variable
+{
+    [self.brain.activeFunction pushVariable:variable];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Button presses
@@ -199,7 +216,6 @@
     if (self.userIsCurrentlyEnteringData) {
         [self enterPressed];
     }
-    [self.brain.activeFunction pushVariable:[sender currentTitle]];
     [self updateDisplay];
 }
 

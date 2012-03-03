@@ -8,6 +8,10 @@
 
 #import "CalculatorVariablesDetailViewController.h"
 
+@interface CalculatorVariablesDetailViewController () <UITextFieldDelegate>
+
+@end
+
 @implementation CalculatorVariablesDetailViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -27,6 +31,12 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+#pragma mark - Properties
+
+@synthesize nameCell = _nameCell;
+@synthesize valueCell = _valueCell;
+@synthesize delegate = _delegate;
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -42,6 +52,8 @@
 
 - (void)viewDidUnload
 {
+    [self setNameCell:nil];
+    [self setValueCell:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -77,28 +89,36 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell;
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    switch (indexPath.row) {
+        case 0:
+            cell = self.nameCell;
+            [(UITextField *)[cell viewWithTag:1] setDelegate:self];
+            [(UITextField *)[cell viewWithTag:1] setText:self.variableName];
+            break;
+            
+        case 1:
+            cell = self.valueCell;
+            [(UITextField *)[cell viewWithTag:2] setDelegate:self];
+            [(UITextField *)[cell viewWithTag:2] setText:[self.variableValue stringValue]];
+            break;
+            
+        default:
+            break;
     }
-    
-    // Configure the cell...
     
     return cell;
 }
@@ -155,4 +175,32 @@
      */
 }
 
+#pragma mark - Text field delegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField endEditing:YES];
+    if ([textField resignFirstResponder]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+#pragma mark - Button presses
+
+- (IBAction)cancelButtonPressed:(id)sender
+{
+    [self.delegate dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)doneButtonPressed:(id)sender
+{
+    NSDictionary *variables = [NSDictionary dictionaryWithObject:
+                               [NSNumber numberWithDouble:[[(UITextField *)[self.valueCell viewWithTag:2] text] doubleValue]]
+                                                          forKey:[(UITextField *)[self.nameCell viewWithTag:1] text]
+                               ];
+    
+    [self.delegate defineVariables:variables];
+}
 @end
