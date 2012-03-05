@@ -400,7 +400,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="X8q-H1-ciq" kind="push" identifier="PushGraphViewController" id="hvE-iL-6yz"/>
+                                    <segue destination="Uhm-L8-dSI" kind="push" identifier="PushGraphVariableChooser" id="WSK-VK-561"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vs1-ow-URY">
@@ -563,21 +563,6 @@
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="1531" y="-508"/>
-        </scene>
-        <!--Calculator Graph View Controller - Graph-->
-        <scene sceneID="8Wo-8z-Fbo">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pbG-rs-AAG" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="X8q-H1-ciq" customClass="CalculatorGraphViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="UFR-RC-2Cr">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Graph" id="7LE-TN-T0L"/>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="1531" y="79"/>
         </scene>
         <!--Calculator Function View Controller - Functions-->
         <scene sceneID="Esk-nP-7iU">
@@ -771,10 +756,100 @@
             </objects>
             <point key="canvasLocation" x="2550" y="-508"/>
         </scene>
+        <!--Calculator Graph Variable Chooser View Controller - Variables-->
+        <scene sceneID="xJr-13-ZXa">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1QA-5S-g8Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="Uhm-L8-dSI" customClass="CalculatorGraphVariableChooserViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="k6x-De-OaK">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VariableCell" textLabel="3Be-MI-73Y" detailTextLabel="ieq-vu-h8W" style="IBUITableViewCellStyleValue1" id="feA-js-B78">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="x" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" id="3Be-MI-73Y">
+                                            <rect key="frame" x="10" y="11" width="10" height="21"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" id="ieq-vu-h8W">
+                                            <rect key="frame" x="280" y="11" width="10" height="21"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.21960784310000001" green="0.3294117647" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <connections>
+                                    <segue destination="I9i-9Y-Z63" kind="push" identifier="PushGraphViewController" id="8Sx-ls-1vN"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Uhm-L8-dSI" id="WDK-el-tQX"/>
+                            <outlet property="delegate" destination="Uhm-L8-dSI" id="k2v-rX-qEu"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Variables" id="WAo-bF-hTX"/>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="1531" y="79"/>
+        </scene>
+        <!--Calculator Graph View Controller - Graph-->
+        <scene sceneID="KEQ-iE-U21">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HLw-c2-kya" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="I9i-9Y-Z63" customClass="CalculatorGraphViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QkZ-9A-Krh">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="O0M-LL-k5a">
+                                <rect key="frame" x="20" y="0.0" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" id="S23-ng-RIB" customClass="CalculatorGraphView">
+                                <rect key="frame" x="0.0" y="29" width="320" height="387"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="I9i-9Y-Z63" id="m1u-8Z-ln4"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Graph" id="3if-jR-5Nv"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="2040" y="79"/>
+        </scene>
     </scenes>
     <classes>
         <class className="CalculatorFunctionViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CalculatorFunctionViewController.h"/>
+        </class>
+        <class className="CalculatorGraphVariableChooserViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CalculatorGraphVariableChooserViewController.h"/>
+        </class>
+        <class className="CalculatorGraphView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CalculatorGraphView.h"/>
+            <relationships>
+                <relationship kind="outlet" name="dataSource"/>
+            </relationships>
         </class>
         <class className="CalculatorGraphViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CalculatorGraphViewController.h"/>
