@@ -28,6 +28,7 @@ typedef enum _CalculatorOperation {
 @interface CalculatorFunction : NSObject
 
 @property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSMutableArray *program;
 @property (nonatomic, strong, readonly) NSMutableDictionary *variables;
 
 - (CalculatorFunction *)initWithTitle:(NSString *)title;

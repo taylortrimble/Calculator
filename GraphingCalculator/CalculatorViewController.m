@@ -8,6 +8,7 @@
 
 #import "CalculatorViewController.h"
 #import "CalculatorVariablesViewController.h"
+#import "CalculatorGraphVariableChooserViewController.h"
 
 @interface CalculatorViewController() <CalculatorVariablesViewControllerDelegate>
 
@@ -78,6 +79,9 @@
     if ([segue.identifier isEqualToString:@"PresentVariablesViewController"]) {
         [(CalculatorVariablesViewController *)[segue.destinationViewController topViewController] setDelegate:self];
         [(CalculatorVariablesViewController *)[segue.destinationViewController topViewController] setVariables:self.brain.activeFunction.variables];
+    } else if ([segue.identifier isEqualToString:@"PushGraphVariableChooser"]) {
+        CalculatorGraphVariableChooserViewController *destinationViewController = segue.destinationViewController;
+        destinationViewController.function = self.brain.activeFunction;
     }
 }
 

@@ -1,5 +1,5 @@
 //
-//  CalculatorGraphViewController.h
+//  CalculatorGraphVariableChooserViewController.h
 //  GraphingCalculator
 //
 //  Created by Taylor Trimble on 3/4/12.
@@ -8,11 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "CalculatorFunction.h"
-#import "CalculatorGraphView.h"
 
-@interface CalculatorGraphViewController : UIViewController <CalculatorGraphViewDataSource>
+@interface CalculatorGraphVariableChooserViewController : UITableViewController
 
 @property (weak, nonatomic) CalculatorFunction *function;
-@property (weak, nonatomic) NSString *graphingVariable;
 
 @end

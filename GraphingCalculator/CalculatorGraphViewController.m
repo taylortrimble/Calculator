@@ -2,11 +2,15 @@
 //  CalculatorGraphViewController.m
 //  GraphingCalculator
 //
-//  Created by Taylor Trimble on 1/30/12.
+//  Created by Taylor Trimble on 3/4/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
 #import "CalculatorGraphViewController.h"
+
+@interface CalculatorGraphViewController ()
+
+@end
 
 @implementation CalculatorGraphViewController
 
@@ -19,42 +23,43 @@
     return self;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
-#pragma mark - View lifecycle
-
 /*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView
 {
+    // If you create your views manually, you MUST override this method and use it to create your views.
+    // If you use Interface Builder to create your views, then you must NOT override this method.
 }
-*/
+ */
 
-/*
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	// Do any additional setup after loading the view, typically from a nib.
 }
-*/
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
-	return YES;
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - Graph view data source
+
+- (CGRect)graphingWindow
+{
+    return CGRectMake(-10, -10, 20, 20);
+}
+
+- (double)valueForInput:(double)x
+{
+    CalculatorFunction *functionCopy = [self.function copy];
+    [functionCopy defineVariables:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:x] forKey:self.graphingVariable]];
+    return [functionCopy runProgram];
 }
 
 @end

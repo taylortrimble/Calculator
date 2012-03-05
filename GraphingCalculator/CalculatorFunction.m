@@ -17,9 +17,8 @@ typedef enum _CalculatorOperationPriority {
     CalculatorOperationPriorityFunction,
 } CalculatorOperationPriority;
 
-@interface CalculatorFunction()
+@interface CalculatorFunction() <NSCopying>
 
-@property (nonatomic, strong) NSMutableArray *program;
 @property (nonatomic, strong) NSMutableIndexSet *operationIndexes;
 
 - (double)evaluateLastProgramItem;
@@ -415,6 +414,17 @@ typedef enum _CalculatorOperationPriority {
 {
     self.program = nil;
     self.operationIndexes = nil;
+}
+
+#pragma mark - Copying protocol
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    CalculatorFunction *functionCopy = [[CalculatorFunction allocWithZone:zone] initWithTitle:[NSString stringWithFormat:@"%@Copy", self.title]];
+    functionCopy.program = [self.program mutableCopyWithZone:zone];
+    [functionCopy defineVariables:self.variables];
+    
+    return functionCopy;
 }
 
 @end
