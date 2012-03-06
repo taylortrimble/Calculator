@@ -35,10 +35,12 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    self.functionDisplay.text = [NSString stringWithFormat:@"%@ = %@", self.function.title, self.function.programDescription];
 }
 
 - (void)viewDidUnload
 {
+    self.functionDisplay = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -52,7 +54,7 @@
 
 - (CGRect)graphingWindow
 {
-    return CGRectMake(-10, -10, 20, 20);
+    return CGRectMake(-10, -5, 20, 20);
 }
 
 - (double)valueForInput:(double)x

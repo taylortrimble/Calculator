@@ -78,8 +78,6 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
     cell.textLabel.text = [[self.function.variables allKeys] objectAtIndex:indexPath.row];
-    cell.detailTextLabel.text = [[self.function.variables objectForKey:
-                                 [[self.function.variables allKeys] objectAtIndex:indexPath.row]] stringValue];
     
     return cell;
 }

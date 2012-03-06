@@ -18,6 +18,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableViewCell *nameCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *valueCell;
+@property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (nonatomic, weak) id <CalculatorVariablesDetailViewControllerDelegate> delegate;
 
 - (IBAction)cancelButtonPressed:(id)sender;
