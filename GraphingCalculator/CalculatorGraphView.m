@@ -11,6 +11,7 @@
 
 
 #define NUMBER_OF_X_TICKS 4
+#define NUMBER_OF_Y_TICKS 4
 #define TICK_HEIGHT 5.0
 
 @interface CalculatorGraphView ()
@@ -95,6 +96,8 @@
         [xTick stroke];
         CGContextRestoreGState(context);
     }
+    
+//    [self yTicks];
     
     // Draw function
     [[UIColor blueColor] setStroke];
@@ -215,7 +218,78 @@
 
 - (NSArray *)yTicks
 {
-    return [NSArray array];
+    NSMutableArray *yTicks = [NSMutableArray array];
+    
+    CGFloat yDiv = CGRectGetHeight([self.dataSource graphingWindow])/NUMBER_OF_Y_TICKS;
+    NSInteger power;
+    if (yDiv >= 1.0) {
+        for (power = -1; yDiv > 1.0; power++) {
+            yDiv = yDiv/10.0;
+        }
+    } else {
+        for (power = 0; yDiv < 1.0; power--) {
+            yDiv = yDiv*10.0;
+        }
+    }
+    
+    // Need to use lookup table instead of switch case
+    yDiv = pow(10.0, power);
+    double multiplier = 1.0;
+    for (NSUInteger index = 0; index <= 3; index++) {
+        double yDistance = yDiv;
+        switch (index) {
+            case 0:
+                if (ABS(1.0*yDiv-CGRectGetHeight([self.dataSource graphingWindow])/NUMBER_OF_Y_TICKS) < yDistance) {
+                    multiplier = 1.0;
+                    yDistance = ABS(1.0*yDiv-CGRectGetHeight([self.dataSource graphingWindow])/NUMBER_OF_Y_TICKS);
+                }
+                
+                break;
+                
+            case 1:
+                if (ABS(2.0*yDiv-CGRectGetHeight([self.dataSource graphingWindow])/NUMBER_OF_Y_TICKS) < yDistance) {
+                    multiplier = 2.0;
+                    yDistance = ABS(2.0*yDiv-CGRectGetHeight([self.dataSource graphingWindow])/NUMBER_OF_Y_TICKS);
+                }
+                
+                break;
+                
+            case 2:
+                if (ABS(5.0*yDiv-CGRectGetHeight([self.dataSource graphingWindow])/NUMBER_OF_Y_TICKS) < yDistance) {
+                    multiplier = 5.0;
+                    yDistance = ABS(5.0*yDiv-CGRectGetHeight([self.dataSource graphingWindow])/NUMBER_OF_Y_TICKS);
+                }
+                
+                break;
+                
+            case 3:
+                if (ABS(10.0*yDiv-CGRectGetHeight([self.dataSource graphingWindow])/NUMBER_OF_Y_TICKS) < yDistance) {
+                    multiplier = 10.0;
+                    yDistance = ABS(10.0*yDiv-CGRectGetHeight([self.dataSource graphingWindow])/NUMBER_OF_Y_TICKS);
+                }
+                
+                break;
+                
+            default:
+                multiplier = 1.0;
+                break;
+        }
+    }
+    yDiv = yDiv * multiplier;
+    
+    double firstTick = CGRectGetMaxY([self.dataSource graphingWindow]) - fmod(firstTick, yDiv);
+    if (firstTick != 0) {
+        [yTicks addObject:[NSNumber numberWithDouble:[self convertDomainValue:firstTick]]];
+    }
+    
+    for (double tick = firstTick-yDiv;
+         tick >= CGRectGetMinY([self.dataSource graphingWindow]);
+         tick = tick - yDiv) {
+        if (tick != 0.0) {
+            [yTicks addObject:[NSNumber numberWithDouble:[self convertDomainValue:tick]]];
+        }
+    }    
+    return [yTicks copy];
 }
 
 @end
