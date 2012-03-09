@@ -416,13 +416,14 @@ typedef enum _CalculatorOperationPriority {
     self.operationIndexes = nil;
 }
 
-#pragma mark - Copying protocol
+#pragma mark - Copying
 
 - (id)copyWithZone:(NSZone *)zone
 {
     CalculatorFunction *functionCopy = [[CalculatorFunction allocWithZone:zone] initWithTitle:[NSString stringWithFormat:@"%@Copy", self.title]];
     functionCopy.program = [self.program mutableCopyWithZone:zone];
     [functionCopy defineVariables:self.variables];
+    functionCopy.operationIndexes = [self.operationIndexes mutableCopyWithZone:zone];
     
     return functionCopy;
 }

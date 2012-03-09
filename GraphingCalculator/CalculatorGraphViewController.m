@@ -54,13 +54,13 @@
 
 - (CGRect)graphingWindow
 {
-    return CGRectMake(-10, -5, 20, 20);
+    return CGRectMake(20, -5, 10, 20);
 }
 
 - (double)valueForInput:(double)x
 {
     CalculatorFunction *functionCopy = [self.function copy];
-    [functionCopy defineVariables:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:x] forKey:self.graphingVariable]];
+    [functionCopy defineVariables:[NSDictionary dictionaryWithObject:[NSNumber numberWithDouble:x] forKey:self.graphingVariable]];
     return [functionCopy runProgram];
 }
 
