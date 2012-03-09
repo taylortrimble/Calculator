@@ -58,8 +58,8 @@
     // Function
     double minX = CGRectGetMinX([self.dataSource graphingWindow]);
     UIBezierPath *function = [UIBezierPath bezierPath];
-    [function moveToPoint:CGPointMake(minX, [self.dataSource valueForInput:minX])];
-    
+    [function moveToPoint:CGPointMake([self convertDomainValue:minX],
+                                      [self convertRangeValue:[self.dataSource valueForInput:minX]])];
     double widthInPixels = CGRectGetWidth(self.bounds)*self.contentScaleFactor;
     double xDiv = CGRectGetWidth([self.dataSource graphingWindow]) / widthInPixels;
     for (NSUInteger index = 1; index <= widthInPixels; index++) {
