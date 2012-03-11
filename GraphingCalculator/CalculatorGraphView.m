@@ -42,19 +42,17 @@
 - (void)drawRect:(CGRect)rect
 {
     // Bezier paths
-    CGFloat xAxisOffset = [self xAxisOffset];
     UIBezierPath *xAxis = [UIBezierPath bezierPath];
     [xAxis moveToPoint:CGPointZero];
     [xAxis addLineToPoint:CGPointMake(CGRectGetMaxX(self.bounds), 0.0)];
     
-    CGFloat yAxisOffset = [self yAxisOffset];
     UIBezierPath *yAxis = [UIBezierPath bezierPath];
     [yAxis moveToPoint:CGPointZero];
     [yAxis addLineToPoint:CGPointMake(0.0, CGRectGetMaxY(self.bounds))];
     
-    UIBezierPath *xTick = [UIBezierPath bezierPath];
-    [xTick moveToPoint:CGPointMake(0.0, 0.0)];
-    [xTick addLineToPoint:CGPointMake(0.0, TICK_HEIGHT)];
+    UIBezierPath *tick = [UIBezierPath bezierPath];
+    [tick moveToPoint:CGPointMake(0.0, 0.0)];
+    [tick addLineToPoint:CGPointMake(0.0, TICK_HEIGHT)];
     
     // Function
     double minX = CGRectGetMinX([self.dataSource graphingWindow]);
@@ -76,33 +74,33 @@
     
     // Draw axes
     CGContextSaveGState(context);
-    CGContextTranslateCTM(context, 0.0, xAxisOffset);
+    CGContextTranslateCTM(context, 0.0, [self convertRangeValue:0.0]);
     [xAxis stroke];
     CGContextRestoreGState(context);
     
     CGContextSaveGState(context);
-    CGContextTranslateCTM(context, yAxisOffset, 0.0);
+    CGContextTranslateCTM(context, [self convertDomainValue:0.0], 0.0);
     [yAxis stroke];
     CGContextRestoreGState(context);
     
     // Draw ticks
     CGContextSaveGState(context);
-    CGContextTranslateCTM(context, 0.0, xAxisOffset-TICK_HEIGHT/2);
+    CGContextTranslateCTM(context, 0.0, [self xAxisOffset]-TICK_HEIGHT/2);
     for (NSNumber *tickOffset in [self xTicks]) {
         CGContextSaveGState(context);
         CGContextTranslateCTM(context, [tickOffset doubleValue], 0.0);
-        [xTick stroke];
+        [tick stroke];
         CGContextRestoreGState(context);
     }
     CGContextRestoreGState(context);
     
     CGContextSaveGState(context);
     CGContextRotateCTM(context, M_PI_2/1.0);
-    CGContextTranslateCTM(context, 0, -yAxisOffset-TICK_HEIGHT/2);
+    CGContextTranslateCTM(context, 0, -[self yAxisOffset]-TICK_HEIGHT/2);
     for (NSNumber *tickOffset in [self yTicks]) {
         CGContextSaveGState(context);
         CGContextTranslateCTM(context, [tickOffset doubleValue], 0.0);
-        [xTick stroke];
+        [tick stroke];
         CGContextRestoreGState(context);
     }
     CGContextRestoreGState(context);

@@ -54,7 +54,7 @@
 
 - (CGRect)graphingWindow
 {
-    return CGRectMake(20, -5, 10, 20);
+    return CGRectMake(-5, -5, 20, 15);
 }
 
 - (double)valueForInput:(double)x
