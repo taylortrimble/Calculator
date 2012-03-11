@@ -12,7 +12,7 @@
 
 #define NUMBER_OF_X_TICKS 4
 #define NUMBER_OF_Y_TICKS 4
-#define TICK_HEIGHT 5.0
+#define TICK_HEIGHT 10.0
 
 @interface CalculatorGraphView ()
 
@@ -53,8 +53,8 @@
     [yAxis addLineToPoint:CGPointMake(0.0, CGRectGetMaxY(self.bounds))];
     
     UIBezierPath *xTick = [UIBezierPath bezierPath];
-    [xTick moveToPoint:CGPointMake(0.0, xAxisOffset+TICK_HEIGHT)];
-    [xTick addLineToPoint:CGPointMake(0.0, xAxisOffset-TICK_HEIGHT)];
+    [xTick moveToPoint:CGPointMake(0.0, 0.0)];
+    [xTick addLineToPoint:CGPointMake(0.0, TICK_HEIGHT)];
     
     // Function
     double minX = CGRectGetMinX([self.dataSource graphingWindow]);
@@ -90,12 +90,15 @@
     CGContextRestoreGState(context);
     
     // Draw ticks
+    CGContextSaveGState(context);
+    CGContextTranslateCTM(context, 0.0, xAxisOffset-TICK_HEIGHT/2);
     for (NSNumber *tickOffset in [self xTicks]) {
         CGContextSaveGState(context);
         CGContextTranslateCTM(context, [tickOffset doubleValue], 0.0);
         [xTick stroke];
         CGContextRestoreGState(context);
     }
+    CGContextRestoreGState(context);
     
 //    [self yTicks];
     
