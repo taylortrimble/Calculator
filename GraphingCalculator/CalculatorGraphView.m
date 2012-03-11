@@ -201,7 +201,7 @@
     }
     xDiv = xDiv * multiplier;
     
-    double firstTick = CGRectGetMinX([self.dataSource graphingWindow]) - fmod(firstTick, xDiv);
+    double firstTick = CGRectGetMinX([self.dataSource graphingWindow]) - fmod(CGRectGetMinX([self.dataSource graphingWindow]), xDiv);
     if (firstTick != 0) {
         [xTicks addObject:[NSNumber numberWithDouble:[self convertDomainValue:firstTick]]];
     }
@@ -277,7 +277,7 @@
     }
     yDiv = yDiv * multiplier;
     
-    double firstTick = CGRectGetMaxY([self.dataSource graphingWindow]) - fmod(firstTick, yDiv);
+    double firstTick = CGRectGetMaxY([self.dataSource graphingWindow]) - fmod(CGRectGetMaxY([self.dataSource graphingWindow]), yDiv);
     if (firstTick != 0) {
         [yTicks addObject:[NSNumber numberWithDouble:[self convertDomainValue:firstTick]]];
     }
