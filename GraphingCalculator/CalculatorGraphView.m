@@ -64,10 +64,6 @@
     double widthInPixels = CGRectGetWidth(self.bounds)*self.contentScaleFactor;
     double xDiv = CGRectGetWidth([self.dataSource graphingWindow]) / widthInPixels;
     for (NSUInteger index = 1; index <= widthInPixels; index++) {
-        
-        NSLog(@"%@", NSStringFromCGPoint(CGPointMake(minX+index*xDiv,
-                                                     [self.dataSource valueForInput:minX+index*xDiv])));
-        
         CGPoint point = CGPointMake([self convertDomainValue:minX+index*xDiv],
                                     [self convertRangeValue:[self.dataSource valueForInput:minX+index*xDiv]]);
         
@@ -100,7 +96,16 @@
     }
     CGContextRestoreGState(context);
     
-//    [self yTicks];
+    CGContextSaveGState(context);
+    CGContextRotateCTM(context, M_PI_2/1.0);
+    CGContextTranslateCTM(context, 0, -yAxisOffset-TICK_HEIGHT/2);
+    for (NSNumber *tickOffset in [self yTicks]) {
+        CGContextSaveGState(context);
+        CGContextTranslateCTM(context, [tickOffset doubleValue], 0.0);
+        [xTick stroke];
+        CGContextRestoreGState(context);
+    }
+    CGContextRestoreGState(context);
     
     // Draw function
     [[UIColor blueColor] setStroke];
@@ -282,14 +287,14 @@
     
     double firstTick = CGRectGetMaxY([self.dataSource graphingWindow]) - fmod(CGRectGetMaxY([self.dataSource graphingWindow]), yDiv);
     if (firstTick != 0) {
-        [yTicks addObject:[NSNumber numberWithDouble:[self convertDomainValue:firstTick]]];
+        [yTicks addObject:[NSNumber numberWithDouble:[self convertRangeValue:firstTick]]];
     }
     
     for (double tick = firstTick-yDiv;
          tick >= CGRectGetMinY([self.dataSource graphingWindow]);
          tick = tick - yDiv) {
         if (tick != 0.0) {
-            [yTicks addObject:[NSNumber numberWithDouble:[self convertDomainValue:tick]]];
+            [yTicks addObject:[NSNumber numberWithDouble:[self convertRangeValue:tick]]];
         }
     }    
     return [yTicks copy];
