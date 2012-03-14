@@ -14,6 +14,9 @@
 
 @property (weak, nonatomic) IBOutlet id <CalculatorGraphViewDataSource> dataSource;
 
+- (IBAction)handlePinchGesture:(UIPinchGestureRecognizer *)pinchGR;
+- (IBAction)handlePanGesture:(UIPanGestureRecognizer *)panGR;
+
 @end
 
 @protocol CalculatorGraphViewDataSource <NSObject>

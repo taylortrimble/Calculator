@@ -110,6 +110,18 @@
     [function stroke];
 }
 
+#pragma mark - Gesture recognizer actions
+
+- (IBAction)handlePinchGesture:(UIPinchGestureRecognizer *)pinchGR
+{
+    NSLog(@"%g", pinchGR.scale);
+}
+
+- (IBAction)handlePanGesture:(UIPanGestureRecognizer *)panGR
+{
+    NSLog(@"%@", NSStringFromCGPoint([panGR translationInView:self]));
+}
+
 #pragma mark - Private methods
 
 - (CGFloat)convertDomainValue:(double)x

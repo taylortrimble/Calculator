@@ -826,18 +826,32 @@
                                 <rect key="frame" x="0.0" y="29" width="320" height="387"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
                                 <connections>
                                     <outlet property="dataSource" destination="I9i-9Y-Z63" id="m1u-8Z-ln4"/>
+                                    <outletCollection property="gestureRecognizers" destination="tkH-I3-8Z7" appends="YES" id="0Lg-FS-ReO"/>
+                                    <outletCollection property="gestureRecognizers" destination="W4V-0T-J4m" appends="YES" id="z67-9g-uan"/>
                                 </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                     </view>
                     <navigationItem key="navigationItem" title="Graph" id="3if-jR-5Nv"/>
                     <connections>
                         <outlet property="functionDisplay" destination="O0M-LL-k5a" id="2Vk-Qc-TBc"/>
                     </connections>
                 </viewController>
+                <pinchGestureRecognizer id="tkH-I3-8Z7">
+                    <connections>
+                        <action selector="handlePinchGesture:" destination="S23-ng-RIB" id="nU5-BO-BG6"/>
+                    </connections>
+                </pinchGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="W4V-0T-J4m">
+                    <connections>
+                        <action selector="handlePanGesture:" destination="S23-ng-RIB" id="ptc-w0-nxk"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2040" y="79"/>
         </scene>
@@ -852,6 +866,8 @@
         <class className="CalculatorGraphView" superclassName="UIView">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CalculatorGraphView.h"/>
             <relationships>
+                <relationship kind="action" name="handlePanGesture:" candidateClass="UIPanGestureRecognizer"/>
+                <relationship kind="action" name="handlePinchGesture:" candidateClass="UIPinchGestureRecognizer"/>
                 <relationship kind="outlet" name="dataSource"/>
             </relationships>
         </class>
