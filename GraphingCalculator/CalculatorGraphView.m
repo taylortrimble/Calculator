@@ -17,6 +17,10 @@
 
 @interface CalculatorGraphView () <UIGestureRecognizerDelegate>
 
+- (CGRect)graphingWindow;
+@property CGFloat scale;
+@property CGPoint translation;
+
 - (void)handleScaleGesture:(CalculatorScaleGestureRecognizer *)sender;
 - (void)handlePinchGesture:(UIPinchGestureRecognizer *)sender;
 - (void)handlePanGesture:(UIPanGestureRecognizer *)sender;
@@ -47,6 +51,8 @@
 //    CalculatorScaleGestureRecognizer *scaleGestureRecognizer = [[CalculatorScaleGestureRecognizer alloc] init];
 //    [scaleGestureRecognizer addTarget:self action:@selector(handleScaleGesture:)];
 //    [self addGestureRecognizer:scaleGestureRecognizer];
+    self.scale = 1.0;
+    self.translation = CGPointZero;
     
     [self addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinchGesture:)]];
     [self addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)]];
@@ -70,16 +76,16 @@
     [yAxis addLineToPoint:CGPointMake(0.0, CGRectGetMaxY(self.bounds))];
     
     UIBezierPath *tick = [UIBezierPath bezierPath];
-    [tick moveToPoint:CGPointMake(0.0, 0.0)];
+    [tick moveToPoint:CGPointZero];
     [tick addLineToPoint:CGPointMake(0.0, TICK_HEIGHT)];
     
     // Function
-    double minX = CGRectGetMinX([self.dataSource graphingWindow]);
+    double minX = CGRectGetMinX([self graphingWindow]);
     UIBezierPath *function = [UIBezierPath bezierPath];
     [function moveToPoint:CGPointMake([self convertDomainValue:minX],
                                       [self convertRangeValue:[self.dataSource valueForInput:minX]])];
     double widthInPixels = CGRectGetWidth(self.bounds)*self.contentScaleFactor;
-    double xDiv = CGRectGetWidth([self.dataSource graphingWindow]) / widthInPixels;
+    double xDiv = CGRectGetWidth([self graphingWindow]) / widthInPixels;
     for (NSUInteger index = 1; index <= widthInPixels; index++) {
         CGPoint point = CGPointMake([self convertDomainValue:minX+index*xDiv],
                                     [self convertRangeValue:[self.dataSource valueForInput:minX+index*xDiv]]);
@@ -138,11 +144,22 @@
 
 - (void)handlePinchGesture:(UIPinchGestureRecognizer *)sender
 {
-    
+    if (sender.state==UIGestureRecognizerStateEnded || sender.state==UIGestureRecognizerStateCancelled) {
+        self.scale = 1.0;
+        [self.dataSource updateScale:sender.scale];
+    } else {
+        self.scale = sender.scale;
+    }
 }
 
 - (void)handlePanGesture:(UIPanGestureRecognizer *)sender
 {
+    if (sender.state==UIGestureRecognizerStateEnded || sender.state==UIGestureRecognizerStateCancelled) {
+        self.translation = CGPointZero;
+        [self.dataSource updateTranslation:self.translation];
+    } else {
+        self.translation = [sender translationInView:self];
+    }
     
 }
 
@@ -155,18 +172,32 @@
 
 #pragma mark - Private methods
 
+#pragma mark Window
+- (CGRect)graphingWindow
+{
+    CGRect graphingWindow = [self.dataSource graphingWindow];
+    graphingWindow.size.width *= self.scale;
+    graphingWindow.size.height *= self.scale;
+    graphingWindow.origin.x = graphingWindow.origin.x + self.translation.x;
+    graphingWindow.origin.y = graphingWindow.origin.y + self.translation.y;
+    
+    return graphingWindow;
+}
+
+#pragma mark Point conversions
+
 - (CGFloat)convertDomainValue:(double)x
 {
-    double maxX = CGRectGetMaxX([self.dataSource graphingWindow]);
-    double minX = CGRectGetMinX([self.dataSource graphingWindow]);
+    double maxX = CGRectGetMaxX([self graphingWindow]);
+    double minX = CGRectGetMinX([self graphingWindow]);
     
     return (minX-x)/(minX-maxX)*CGRectGetWidth(self.bounds);
 }
 
 - (CGFloat)convertRangeValue:(double)y
 {
-    double maxY = CGRectGetMaxY([self.dataSource graphingWindow]);
-    double minY = CGRectGetMinY([self.dataSource graphingWindow]);
+    double maxY = CGRectGetMaxY([self graphingWindow]);
+    double minY = CGRectGetMinY([self graphingWindow]);
     
     return (maxY-y)/(maxY-minY)*CGRectGetHeight(self.bounds);
 }
@@ -193,7 +224,7 @@
 {
     NSMutableArray *xTicks = [NSMutableArray array];
     
-    CGFloat xDiv = CGRectGetWidth([self.dataSource graphingWindow])/NUMBER_OF_X_TICKS;
+    CGFloat xDiv = CGRectGetWidth([self graphingWindow])/NUMBER_OF_X_TICKS;
     NSInteger power;
     if (xDiv >= 1.0) {
         for (power = -1; xDiv > 1.0; power++) {
@@ -212,33 +243,33 @@
         double xDistance = xDiv;
         switch (index) {
             case 0:
-                if (ABS(1.0*xDiv-CGRectGetWidth([self.dataSource graphingWindow])/NUMBER_OF_X_TICKS) < xDistance) {
+                if (ABS(1.0*xDiv-CGRectGetWidth([self graphingWindow])/NUMBER_OF_X_TICKS) < xDistance) {
                     multiplier = 1.0;
-                    xDistance = ABS(1.0*xDiv-CGRectGetWidth([self.dataSource graphingWindow])/NUMBER_OF_X_TICKS);
+                    xDistance = ABS(1.0*xDiv-CGRectGetWidth([self graphingWindow])/NUMBER_OF_X_TICKS);
                 }
                 
                 break;
                 
             case 1:
-                if (ABS(2.0*xDiv-CGRectGetWidth([self.dataSource graphingWindow])/NUMBER_OF_X_TICKS) < xDistance) {
+                if (ABS(2.0*xDiv-CGRectGetWidth([self graphingWindow])/NUMBER_OF_X_TICKS) < xDistance) {
                     multiplier = 2.0;
-                    xDistance = ABS(2.0*xDiv-CGRectGetWidth([self.dataSource graphingWindow])/NUMBER_OF_X_TICKS);
+                    xDistance = ABS(2.0*xDiv-CGRectGetWidth([self graphingWindow])/NUMBER_OF_X_TICKS);
                 }
                 
                 break;
                 
             case 2:
-                if (ABS(5.0*xDiv-CGRectGetWidth([self.dataSource graphingWindow])/NUMBER_OF_X_TICKS) < xDistance) {
+                if (ABS(5.0*xDiv-CGRectGetWidth([self graphingWindow])/NUMBER_OF_X_TICKS) < xDistance) {
                     multiplier = 5.0;
-                    xDistance = ABS(5.0*xDiv-CGRectGetWidth([self.dataSource graphingWindow])/NUMBER_OF_X_TICKS);
+                    xDistance = ABS(5.0*xDiv-CGRectGetWidth([self graphingWindow])/NUMBER_OF_X_TICKS);
                 }
 
                 break;
                 
             case 3:
-                if (ABS(10.0*xDiv-CGRectGetWidth([self.dataSource graphingWindow])/NUMBER_OF_X_TICKS) < xDistance) {
+                if (ABS(10.0*xDiv-CGRectGetWidth([self graphingWindow])/NUMBER_OF_X_TICKS) < xDistance) {
                     multiplier = 10.0;
-                    xDistance = ABS(10.0*xDiv-CGRectGetWidth([self.dataSource graphingWindow])/NUMBER_OF_X_TICKS);
+                    xDistance = ABS(10.0*xDiv-CGRectGetWidth([self graphingWindow])/NUMBER_OF_X_TICKS);
                 }
 
                 break;
@@ -250,13 +281,13 @@
     }
     xDiv = xDiv * multiplier;
     
-    double firstTick = CGRectGetMinX([self.dataSource graphingWindow]) - fmod(CGRectGetMinX([self.dataSource graphingWindow]), xDiv);
+    double firstTick = CGRectGetMinX([self graphingWindow]) - fmod(CGRectGetMinX([self graphingWindow]), xDiv);
     if (firstTick != 0) {
         [xTicks addObject:[NSNumber numberWithDouble:[self convertDomainValue:firstTick]]];
     }
     
     for (double tick = firstTick+xDiv;
-         tick <= CGRectGetMaxX([self.dataSource graphingWindow]);
+         tick <= CGRectGetMaxX([self graphingWindow]);
          tick = tick + xDiv) {
         if (tick != 0.0) {
             [xTicks addObject:[NSNumber numberWithDouble:[self convertDomainValue:tick]]];
@@ -269,7 +300,7 @@
 {
     NSMutableArray *yTicks = [NSMutableArray array];
     
-    CGFloat yDiv = CGRectGetHeight([self.dataSource graphingWindow])/NUMBER_OF_Y_TICKS;
+    CGFloat yDiv = CGRectGetHeight([self graphingWindow])/NUMBER_OF_Y_TICKS;
     NSInteger power;
     if (yDiv >= 1.0) {
         for (power = -1; yDiv > 1.0; power++) {
@@ -288,33 +319,33 @@
         double yDistance = yDiv;
         switch (index) {
             case 0:
-                if (ABS(1.0*yDiv-CGRectGetHeight([self.dataSource graphingWindow])/NUMBER_OF_Y_TICKS) < yDistance) {
+                if (ABS(1.0*yDiv-CGRectGetHeight([self graphingWindow])/NUMBER_OF_Y_TICKS) < yDistance) {
                     multiplier = 1.0;
-                    yDistance = ABS(1.0*yDiv-CGRectGetHeight([self.dataSource graphingWindow])/NUMBER_OF_Y_TICKS);
+                    yDistance = ABS(1.0*yDiv-CGRectGetHeight([self graphingWindow])/NUMBER_OF_Y_TICKS);
                 }
                 
                 break;
                 
             case 1:
-                if (ABS(2.0*yDiv-CGRectGetHeight([self.dataSource graphingWindow])/NUMBER_OF_Y_TICKS) < yDistance) {
+                if (ABS(2.0*yDiv-CGRectGetHeight([self graphingWindow])/NUMBER_OF_Y_TICKS) < yDistance) {
                     multiplier = 2.0;
-                    yDistance = ABS(2.0*yDiv-CGRectGetHeight([self.dataSource graphingWindow])/NUMBER_OF_Y_TICKS);
+                    yDistance = ABS(2.0*yDiv-CGRectGetHeight([self graphingWindow])/NUMBER_OF_Y_TICKS);
                 }
                 
                 break;
                 
             case 2:
-                if (ABS(5.0*yDiv-CGRectGetHeight([self.dataSource graphingWindow])/NUMBER_OF_Y_TICKS) < yDistance) {
+                if (ABS(5.0*yDiv-CGRectGetHeight([self graphingWindow])/NUMBER_OF_Y_TICKS) < yDistance) {
                     multiplier = 5.0;
-                    yDistance = ABS(5.0*yDiv-CGRectGetHeight([self.dataSource graphingWindow])/NUMBER_OF_Y_TICKS);
+                    yDistance = ABS(5.0*yDiv-CGRectGetHeight([self graphingWindow])/NUMBER_OF_Y_TICKS);
                 }
                 
                 break;
                 
             case 3:
-                if (ABS(10.0*yDiv-CGRectGetHeight([self.dataSource graphingWindow])/NUMBER_OF_Y_TICKS) < yDistance) {
+                if (ABS(10.0*yDiv-CGRectGetHeight([self graphingWindow])/NUMBER_OF_Y_TICKS) < yDistance) {
                     multiplier = 10.0;
-                    yDistance = ABS(10.0*yDiv-CGRectGetHeight([self.dataSource graphingWindow])/NUMBER_OF_Y_TICKS);
+                    yDistance = ABS(10.0*yDiv-CGRectGetHeight([self graphingWindow])/NUMBER_OF_Y_TICKS);
                 }
                 
                 break;
@@ -326,13 +357,13 @@
     }
     yDiv = yDiv * multiplier;
     
-    double firstTick = CGRectGetMaxY([self.dataSource graphingWindow]) - fmod(CGRectGetMaxY([self.dataSource graphingWindow]), yDiv);
+    double firstTick = CGRectGetMaxY([self graphingWindow]) - fmod(CGRectGetMaxY([self graphingWindow]), yDiv);
     if (firstTick != 0) {
         [yTicks addObject:[NSNumber numberWithDouble:[self convertRangeValue:firstTick]]];
     }
     
     for (double tick = firstTick-yDiv;
-         tick >= CGRectGetMinY([self.dataSource graphingWindow]);
+         tick >= CGRectGetMinY([self graphingWindow]);
          tick = tick - yDiv) {
         if (tick != 0.0) {
             [yTicks addObject:[NSNumber numberWithDouble:[self convertRangeValue:tick]]];
