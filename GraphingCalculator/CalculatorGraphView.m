@@ -27,6 +27,7 @@
 
 - (CGFloat)convertDomainValue:(double)x;
 - (CGFloat)convertRangeValue:(double)y;
+- (CGPoint)convertPointTranslation:(CGPoint)translation;
 - (CGFloat)xAxisOffset;
 - (CGFloat)yAxisOffset;
 
@@ -144,24 +145,34 @@
 
 - (void)handlePinchGesture:(UIPinchGestureRecognizer *)sender
 {
+    NSLog(@"%@", NSStringFromCGPoint([sender locationInView:self]));
     if (sender.state==UIGestureRecognizerStateEnded || sender.state==UIGestureRecognizerStateCancelled) {
         self.scale = 1.0;
+        self.translation = CGPointZero;
+        CGPoint translation;
+        translation.x = [sender locationInView:self].x * (1-1/sender.scale);
+        translation.y = -[sender locationInView:self].x * (1-1/sender.scale);
         [self.dataSource updateScale:sender.scale];
+        [self.dataSource updateTranslation:[self convertPointTranslation:translation]];
     } else {
         self.scale = sender.scale;
+        CGPoint translation;
+        translation.x = [sender locationInView:self].x * (1-1/sender.scale);
+        translation.y = -[sender locationInView:self].x * (1-1/sender.scale);
+        self.translation = [self convertPointTranslation:translation];
     }
+    [self setNeedsDisplay];
 }
 
 - (void)handlePanGesture:(UIPanGestureRecognizer *)sender
 {
-    NSLog(@"%@", NSStringFromCGPoint([sender translationInView:self]));
     if (sender.state==UIGestureRecognizerStateEnded || sender.state==UIGestureRecognizerStateCancelled) {
         self.translation = CGPointZero;
-        [self.dataSource updateTranslation:[sender translationInView:self]];
+        [self.dataSource updateTranslation:[self convertPointTranslation:[sender translationInView:self]]];
     } else {
-        self.translation = [sender translationInView:self];
+        self.translation = [self convertPointTranslation:[sender translationInView:self]];
     }
-    
+    [self setNeedsDisplay];
 }
 
 #pragma mark Gesture recognizer delegate
@@ -179,7 +190,7 @@
     CGRect graphingWindow = [self.dataSource graphingWindow];
     graphingWindow.size.width *= self.scale;
     graphingWindow.size.height *= self.scale;
-    graphingWindow.origin.x = graphingWindow.origin.x + self.translation.x;
+    graphingWindow.origin.x = graphingWindow.origin.x - self.translation.x;
     graphingWindow.origin.y = graphingWindow.origin.y + self.translation.y;
     
     return graphingWindow;
@@ -203,6 +214,14 @@
     return (maxY-y)/(maxY-minY)*CGRectGetHeight(self.bounds);
 }
 
+- (CGPoint)convertPointTranslation:(CGPoint)translation
+{
+    translation.x *= [self.dataSource graphingWindow].size.width/self.bounds.size.width;
+    translation.y *= [self.dataSource graphingWindow].size.height/self.bounds.size.height;
+    
+    return translation;
+}
+
 - (CGFloat)xAxisOffset
 {
     CGFloat offset = [self convertRangeValue:0];
@@ -220,6 +239,8 @@
     
     return offset<minAllowed?minAllowed:(offset>maxAllowed?maxAllowed:offset);  // Offset is in valid range
 }
+
+#pragma mark Tick calculations
 
 - (NSArray *)xTicks
 {

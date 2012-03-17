@@ -74,10 +74,10 @@
 
  - (void)updateTranslation:(CGPoint)translation
 {
-    NSLog(@"%@", NSStringFromCGPoint(translation));
     CGRect graphingWindowCopy = self.graphingWindow;
-    graphingWindowCopy.origin.x += translation.x;
+    graphingWindowCopy.origin.x -= translation.x;
     graphingWindowCopy.origin.y += translation.y;
+    self.graphingWindow = graphingWindowCopy;
 }
 
 @end
