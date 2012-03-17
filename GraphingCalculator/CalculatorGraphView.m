@@ -154,9 +154,10 @@
 
 - (void)handlePanGesture:(UIPanGestureRecognizer *)sender
 {
+    NSLog(@"%@", NSStringFromCGPoint([sender translationInView:self]));
     if (sender.state==UIGestureRecognizerStateEnded || sender.state==UIGestureRecognizerStateCancelled) {
         self.translation = CGPointZero;
-        [self.dataSource updateTranslation:self.translation];
+        [self.dataSource updateTranslation:[sender translationInView:self]];
     } else {
         self.translation = [sender translationInView:self];
     }

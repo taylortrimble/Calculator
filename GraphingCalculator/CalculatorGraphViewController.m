@@ -45,6 +45,11 @@
     // Release any retained subviews of the main view.
 }
 
+- (void)awakeFromNib
+{
+    self.graphingWindow = CGRectMake(-5, -5, 20, 15);
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
@@ -52,16 +57,27 @@
 
 #pragma mark - Graph view data source
 
-- (CGRect)graphingWindow
-{
-    return CGRectMake(-5, -5, 20, 15);
-}
-
 - (double)valueForInput:(double)x
 {
     CalculatorFunction *functionCopy = [self.function copy];
     [functionCopy defineVariables:[NSDictionary dictionaryWithObject:[NSNumber numberWithDouble:x] forKey:self.graphingVariable]];
     return [functionCopy runProgram];
+}
+
+- (void)updateScale:(CGFloat)scale
+{
+    CGRect graphgingWindowCopy = self.graphingWindow;
+    graphgingWindowCopy.size.width *= scale;
+    graphgingWindowCopy.size.height *= scale;
+    self.graphingWindow = graphgingWindowCopy;
+}
+
+ - (void)updateTranslation:(CGPoint)translation
+{
+    NSLog(@"%@", NSStringFromCGPoint(translation));
+    CGRect graphingWindowCopy = self.graphingWindow;
+    graphingWindowCopy.origin.x += translation.x;
+    graphingWindowCopy.origin.y += translation.y;
 }
 
 @end

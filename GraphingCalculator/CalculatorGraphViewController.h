@@ -15,6 +15,8 @@
 @property (weak, nonatomic) CalculatorFunction *function;
 @property (weak, nonatomic) NSString *graphingVariable;
 
+@property CGRect graphingWindow;
+
 @property (weak, nonatomic) IBOutlet UILabel *functionDisplay;
 
 @end
