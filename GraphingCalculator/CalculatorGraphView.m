@@ -145,21 +145,20 @@
 
 - (void)handlePinchGesture:(UIPinchGestureRecognizer *)sender
 {
-    NSLog(@"%@", NSStringFromCGPoint([sender locationInView:self]));
     if (sender.state==UIGestureRecognizerStateEnded || sender.state==UIGestureRecognizerStateCancelled) {
         self.scale = 1.0;
-        self.translation = CGPointZero;
-        CGPoint translation;
-        translation.x = [sender locationInView:self].x * (1-1/sender.scale);
-        translation.y = -[sender locationInView:self].x * (1-1/sender.scale);
-        [self.dataSource updateScale:sender.scale];
-        [self.dataSource updateTranslation:[self convertPointTranslation:translation]];
+//        self.translation = CGPointZero;
+//        CGPoint translation;
+//        translation.x = [sender locationInView:self].x * (1-1/sender.scale);
+//        translation.y = -[sender locationInView:self].x * (1-1/sender.scale);
+        [self.dataSource updateScale:1/sender.scale];
+//        [self.dataSource updateTranslation:[self convertPointTranslation:translation]];
     } else {
-        self.scale = sender.scale;
-        CGPoint translation;
-        translation.x = [sender locationInView:self].x * (1-1/sender.scale);
-        translation.y = -[sender locationInView:self].x * (1-1/sender.scale);
-        self.translation = [self convertPointTranslation:translation];
+        self.scale = 1/sender.scale;
+//        CGPoint translation;
+//        translation.x = [sender locationInView:self].x * (1-1/sender.scale);
+//        translation.y = -[sender locationInView:self].x * (1-1/sender.scale);
+//        self.translation = [self convertPointTranslation:translation];
     }
     [self setNeedsDisplay];
 }
