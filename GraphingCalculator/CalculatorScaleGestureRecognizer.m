@@ -50,7 +50,7 @@
 {
     [super touchesEnded:touches withEvent:event];
     
-    if ([self numberOfTouches] < 2) {
+    if ([self numberOfTouches] < 2 && (self.state == UIGestureRecognizerStateBegan || self.state == UIGestureRecognizerStateChanged)) {
         self.state = UIGestureRecognizerStateEnded;     // Send action message
     }
 }

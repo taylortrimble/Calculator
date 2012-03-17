@@ -8,6 +8,7 @@
 
 #import "CalculatorGraphView.h"
 #import "CalculatorGraphViewController.h"
+#import "CalculatorScaleGestureRecognizer.h"
 
 
 #define NUMBER_OF_X_TICKS 4
@@ -15,6 +16,8 @@
 #define TICK_HEIGHT 10.0
 
 @interface CalculatorGraphView ()
+
+- (void)handleScaleGesture:(CalculatorScaleGestureRecognizer *)sender;
 
 - (CGFloat)convertDomainValue:(double)x;
 - (CGFloat)convertRangeValue:(double)y;
@@ -35,6 +38,13 @@
         // Initialization code
     }
     return self;
+}
+
+- (void)awakeFromNib
+{
+    CalculatorScaleGestureRecognizer *scaleGestureRecognizer = [[CalculatorScaleGestureRecognizer alloc] init];
+    [scaleGestureRecognizer addTarget:self action:@selector(handleScaleGesture:)];
+    [self addGestureRecognizer:scaleGestureRecognizer];
 }
 
 // Only override drawRect: if you perform custom drawing.
@@ -108,6 +118,13 @@
     // Draw function
     [[UIColor blueColor] setStroke];
     [function stroke];
+}
+
+#pragma mark - Gesture handlers
+
+- (void)handleScaleGesture:(CalculatorScaleGestureRecognizer *)sender
+{
+    NSLog(@"xS=%#.3g, yS=%#.3g, xT=%#.3g, yT=%#.3g", sender.xScale, sender.yScale, sender.xOriginTranslation, sender.yOriginTranslation);
 }
 
 #pragma mark - Private methods

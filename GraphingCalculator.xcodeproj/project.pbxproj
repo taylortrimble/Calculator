@@ -25,6 +25,7 @@
 		109C3EFE14D74AE700B543D6 /* CalculatorViewControllerIpad.m in Sources */ = {isa = PBXBuildFile; fileRef = 109C3EFD14D74AE700B543D6 /* CalculatorViewControllerIpad.m */; };
 		10E7F3C315043B5E00C84907 /* CalculatorGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E7F3C215043B5E00C84907 /* CalculatorGraphViewController.m */; };
 		10E7F3C715043B8600C84907 /* CalculatorGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E7F3C615043B8600C84907 /* CalculatorGraphView.m */; };
+		10F235CC1510F5D200D1BD70 /* CalculatorScaleGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F235CB1510F5D200D1BD70 /* CalculatorScaleGestureRecognizer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,8 @@
 		10E7F3C215043B5E00C84907 /* CalculatorGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorGraphViewController.m; sourceTree = "<group>"; };
 		10E7F3C515043B8600C84907 /* CalculatorGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorGraphView.h; sourceTree = "<group>"; };
 		10E7F3C615043B8600C84907 /* CalculatorGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CalculatorGraphView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		10F235CA1510F5D200D1BD70 /* CalculatorScaleGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorScaleGestureRecognizer.h; sourceTree = "<group>"; };
+		10F235CB1510F5D200D1BD70 /* CalculatorScaleGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorScaleGestureRecognizer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +123,8 @@
 				10E7F3C215043B5E00C84907 /* CalculatorGraphViewController.m */,
 				10E7F3C515043B8600C84907 /* CalculatorGraphView.h */,
 				10E7F3C615043B8600C84907 /* CalculatorGraphView.m */,
+				10F235CA1510F5D200D1BD70 /* CalculatorScaleGestureRecognizer.h */,
+				10F235CB1510F5D200D1BD70 /* CalculatorScaleGestureRecognizer.m */,
 				1050C6B214D7C7F60077F204 /* CalculatorBrain.h */,
 				1050C6B314D7C7F60077F204 /* CalculatorBrain.m */,
 				109C3EF614D748E500B543D6 /* CalculatorFunction.h */,
@@ -237,6 +242,7 @@
 				100509931504368A0060B6E4 /* CalculatorGraphVariableChooserViewController.m in Sources */,
 				10E7F3C315043B5E00C84907 /* CalculatorGraphViewController.m in Sources */,
 				10E7F3C715043B8600C84907 /* CalculatorGraphView.m in Sources */,
+				10F235CC1510F5D200D1BD70 /* CalculatorScaleGestureRecognizer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
