@@ -73,14 +73,16 @@
 
 - (CGFloat)xScale
 {
-    return ABS([self locationOfTouch:1 inView:self.view].x - [self locationOfTouch:0 inView:self.view].x) /
+    CGFloat xScale = ABS([self locationOfTouch:1 inView:self.view].x - [self locationOfTouch:0 inView:self.view].x) /
            ABS(self.touch1StartPoint.x - self.touch0StartPoint.x);
+    return (xScale<0.01?0.01:(xScale>100.0?100.0:xScale));
 }
 
 - (CGFloat)yScale
 {
-    return ABS([self locationOfTouch:1 inView:self.view].y - [self locationOfTouch:0 inView:self.view].y) /
+    CGFloat yScale =  ABS([self locationOfTouch:1 inView:self.view].y - [self locationOfTouch:0 inView:self.view].y) /
            ABS(self.touch1StartPoint.y - self.touch0StartPoint.y);
+    return (yScale<0.01?0.01:(yScale>100.0?100.0:yScale));
 }
 
 - (CGFloat)xOriginTranslation
@@ -88,7 +90,8 @@
     CGPoint touch0EndPoint = [self locationOfTouch:0 inView:self.view];
     CGPoint touch1EndPoint = [self locationOfTouch:1 inView:self.view];
     
-    return (self.touch0StartPoint.x*touch1EndPoint.x-self.touch1StartPoint.x*touch0EndPoint.x)/(touch1EndPoint.x-touch0EndPoint.x);
+    CGFloat xOriginTranslation = (self.touch0StartPoint.x*touch1EndPoint.x-self.touch1StartPoint.x*touch0EndPoint.x)/(touch1EndPoint.x-touch0EndPoint.x);
+    return (xOriginTranslation<-1e6?-1e6:(xOriginTranslation>1e6?1e6:xOriginTranslation));
 }
 
 - (CGFloat)yOriginTranslation
@@ -96,7 +99,9 @@
     CGPoint touch0EndPoint = [self locationOfTouch:0 inView:self.view];
     CGPoint touch1EndPoint = [self locationOfTouch:1 inView:self.view];
     
-    return (self.touch0StartPoint.y*touch1EndPoint.y-self.touch1StartPoint.y*touch0EndPoint.y)/(touch1EndPoint.y-touch0EndPoint.y);
+    CGFloat yOriginTranslation = (self.touch0StartPoint.y*touch1EndPoint.y-self.touch1StartPoint.y*touch0EndPoint.y)/(touch1EndPoint.y-touch0EndPoint.y);
+    return (yOriginTranslation<-1e6?-1e6:(yOriginTranslation>1e6?1e6:yOriginTranslation));
+
 }
 
 @end
