@@ -20,5 +20,7 @@
 
 - (CGRect)graphingWindow;
 - (double)valueForInput:(double)x;
+- (void)updateScale:(CGFloat)scale;
+- (void)updateOrigin:(CGPoint)translation;
 
 @end

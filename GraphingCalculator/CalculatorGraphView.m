@@ -15,9 +15,11 @@
 #define NUMBER_OF_Y_TICKS 4
 #define TICK_HEIGHT 10.0
 
-@interface CalculatorGraphView ()
+@interface CalculatorGraphView () <UIGestureRecognizerDelegate>
 
 - (void)handleScaleGesture:(CalculatorScaleGestureRecognizer *)sender;
+- (void)handlePinchGesture:(UIPinchGestureRecognizer *)sender;
+- (void)handlePanGesture:(UIPanGestureRecognizer *)sender;
 
 - (CGFloat)convertDomainValue:(double)x;
 - (CGFloat)convertRangeValue:(double)y;
@@ -42,9 +44,16 @@
 
 - (void)awakeFromNib
 {
-    CalculatorScaleGestureRecognizer *scaleGestureRecognizer = [[CalculatorScaleGestureRecognizer alloc] init];
-    [scaleGestureRecognizer addTarget:self action:@selector(handleScaleGesture:)];
-    [self addGestureRecognizer:scaleGestureRecognizer];
+//    CalculatorScaleGestureRecognizer *scaleGestureRecognizer = [[CalculatorScaleGestureRecognizer alloc] init];
+//    [scaleGestureRecognizer addTarget:self action:@selector(handleScaleGesture:)];
+//    [self addGestureRecognizer:scaleGestureRecognizer];
+    
+    [self addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinchGesture:)]];
+    [self addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)]];
+    
+    for (UIGestureRecognizer *gestureRecognizer in self.gestureRecognizers) {
+        gestureRecognizer.delegate = self;
+    }
 }
 
 // Only override drawRect: if you perform custom drawing.
@@ -125,6 +134,23 @@
 - (void)handleScaleGesture:(CalculatorScaleGestureRecognizer *)sender
 {
     NSLog(@"xS=%#.3g, yS=%#.3g, xT=%#.3g, yT=%#.3g", sender.xScale, sender.yScale, sender.xOriginTranslation, sender.yOriginTranslation);
+}
+
+- (void)handlePinchGesture:(UIPinchGestureRecognizer *)sender
+{
+    
+}
+
+- (void)handlePanGesture:(UIPanGestureRecognizer *)sender
+{
+    
+}
+
+#pragma mark Gesture recognizer delegate
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return NO;
 }
 
 #pragma mark - Private methods
