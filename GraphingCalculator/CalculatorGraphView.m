@@ -148,16 +148,20 @@
     if (sender.state==UIGestureRecognizerStateEnded || sender.state==UIGestureRecognizerStateCancelled) {
         self.scale = 1.0;
 //        self.translation = CGPointZero;
+//        
 //        CGPoint translation;
-//        translation.x = [sender locationInView:self].x * (1-1/sender.scale);
-//        translation.y = -[sender locationInView:self].x * (1-1/sender.scale);
+//        translation.x = [sender locationInView:self].x * (1-sender.scale);
+//        translation.y = [sender locationInView:self].x * (1-sender.scale);
+        
         [self.dataSource updateScale:1/sender.scale];
 //        [self.dataSource updateTranslation:[self convertPointTranslation:translation]];
     } else {
         self.scale = 1/sender.scale;
+        
 //        CGPoint translation;
-//        translation.x = [sender locationInView:self].x * (1-1/sender.scale);
-//        translation.y = -[sender locationInView:self].x * (1-1/sender.scale);
+//        translation.x = [sender locationInView:self].x * (1-sender.scale);
+//        translation.y = [sender locationInView:self].x * (1-sender.scale);
+//        
 //        self.translation = [self convertPointTranslation:translation];
     }
     [self setNeedsDisplay];
@@ -189,8 +193,8 @@
     CGRect graphingWindow = [self.dataSource graphingWindow];
     graphingWindow.size.width *= self.scale;
     graphingWindow.size.height *= self.scale;
-    graphingWindow.origin.x = graphingWindow.origin.x - self.translation.x;
-    graphingWindow.origin.y = graphingWindow.origin.y + self.translation.y;
+    graphingWindow.origin.x += self.translation.x;
+    graphingWindow.origin.y += self.translation.y;
     
     return graphingWindow;
 }
@@ -215,7 +219,7 @@
 
 - (CGPoint)convertPointTranslation:(CGPoint)translation
 {
-    translation.x *= [self.dataSource graphingWindow].size.width/self.bounds.size.width;
+    translation.x *= -[self.dataSource graphingWindow].size.width/self.bounds.size.width;
     translation.y *= [self.dataSource graphingWindow].size.height/self.bounds.size.height;
     
     return translation;
