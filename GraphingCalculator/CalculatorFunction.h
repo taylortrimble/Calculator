@@ -43,6 +43,7 @@ typedef enum _CalculatorOperation {
 - (double)valueForVariable:(NSString *)variable;
 
 - (double)runProgram;
+- (double)runProgramWithVariable:(NSString *)variable equalTo:(double)value;
 - (NSString *)programDescription;
 
 - (void)clear;

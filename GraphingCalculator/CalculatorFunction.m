@@ -20,6 +20,7 @@ typedef enum _CalculatorOperationPriority {
 @interface CalculatorFunction() <NSCopying>
 
 @property (nonatomic, strong) NSMutableIndexSet *operationIndexes;
+@property (nonatomic, strong, readwrite) NSMutableDictionary *variables;       // Redeclare as readwrite
 
 - (double)evaluateLastProgramItem;
 - (NSString *)stringForProgramItemWithPreviousOperationPriority:(CalculatorOperationPriority)previousOperationPriority;
@@ -88,6 +89,21 @@ typedef enum _CalculatorOperationPriority {
     NSMutableArray *programCopy = [self.program mutableCopy];
     double programEvaluation = [self evaluateLastProgramItem];
     self.program = programCopy;
+    return programEvaluation;
+}
+
+- (double)runProgramWithVariable:(NSString *)variable equalTo:(double)value
+{
+    NSMutableArray *programCopy = [self.program mutableCopy];
+    NSMutableDictionary *variablesCopy = [self.variables mutableCopy];
+    
+    NSDictionary *variableDictionary = [NSDictionary dictionaryWithObject:[NSNumber numberWithDouble:value] forKey:variable];
+    [self defineVariables:variableDictionary];
+    double programEvaluation = [self evaluateLastProgramItem];
+    
+    self.program = programCopy;
+    self.variables = variablesCopy;
+    
     return programEvaluation;
 }
 
