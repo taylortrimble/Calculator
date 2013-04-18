@@ -59,9 +59,7 @@
 
 - (double)valueForInput:(double)x
 {
-    CalculatorFunction *functionCopy = [self.function copy];
-    [functionCopy defineVariables:[NSDictionary dictionaryWithObject:[NSNumber numberWithDouble:x] forKey:self.graphingVariable]];
-    return [functionCopy runProgram];
+    return [self.function runProgramWithVariable:self.graphingVariable equalTo:x];
 }
 
 - (void)updateScale:(CGFloat)scale
