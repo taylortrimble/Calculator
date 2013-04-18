@@ -16,6 +16,7 @@
 		1024188714D2445500E0881F /* CalculatorAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1024188614D2445500E0881F /* CalculatorAppDelegate.m */; };
 		1024188A14D2445500E0881F /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1024188814D2445500E0881F /* MainStoryboard_iPhone.storyboard */; };
 		1024188D14D2445500E0881F /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1024188B14D2445500E0881F /* MainStoryboard_iPad.storyboard */; };
+		103AA1BF17204B2700DFDC99 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 103AA1BE17204B2700DFDC99 /* Default-568h@2x.png */; };
 		1042188914D755FE00A48E7E /* CalculatorVariablesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1042188814D755FE00A48E7E /* CalculatorVariablesViewController.m */; };
 		1042188F14D7904800A48E7E /* CalculatorVariablesDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1042188E14D7904800A48E7E /* CalculatorVariablesDetailViewController.m */; };
 		1050C6B014D7C3970077F204 /* CalculatorFunctionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1050C6AF14D7C3970077F204 /* CalculatorFunctionViewController.m */; };
@@ -43,6 +44,7 @@
 		1024188614D2445500E0881F /* CalculatorAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalculatorAppDelegate.m; sourceTree = "<group>"; };
 		1024188914D2445500E0881F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		1024188C14D2445500E0881F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		103AA1BE17204B2700DFDC99 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		1042188714D755FE00A48E7E /* CalculatorVariablesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorVariablesViewController.h; sourceTree = "<group>"; };
 		1042188814D755FE00A48E7E /* CalculatorVariablesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorVariablesViewController.m; sourceTree = "<group>"; };
 		1042188D14D7904800A48E7E /* CalculatorVariablesDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorVariablesDetailViewController.h; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 		1024187D14D2445500E0881F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				103AA1BE17204B2700DFDC99 /* Default-568h@2x.png */,
 				1024187E14D2445500E0881F /* GraphingCalculator-Info.plist */,
 				1024187F14D2445500E0881F /* InfoPlist.strings */,
 				1024188214D2445500E0881F /* main.m */,
@@ -193,7 +196,7 @@
 		1024186914D2445500E0881F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0440;
+				LastUpgradeCheck = 0460;
 			};
 			buildConfigurationList = 1024186C14D2445500E0881F /* Build configuration list for PBXProject "GraphingCalculator" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -220,6 +223,7 @@
 				1024188114D2445500E0881F /* InfoPlist.strings in Resources */,
 				1024188A14D2445500E0881F /* MainStoryboard_iPhone.storyboard in Resources */,
 				1024188D14D2445500E0881F /* MainStoryboard_iPad.storyboard in Resources */,
+				103AA1BF17204B2700DFDC99 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +286,10 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -295,6 +303,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
@@ -308,12 +317,17 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
@@ -330,6 +344,7 @@
 				GCC_PREFIX_HEADER = "GraphingCalculator/GraphingCalculator-Prefix.pch";
 				INFOPLIST_FILE = "GraphingCalculator/GraphingCalculator-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -341,6 +356,7 @@
 				GCC_PREFIX_HEADER = "GraphingCalculator/GraphingCalculator-Prefix.pch";
 				INFOPLIST_FILE = "GraphingCalculator/GraphingCalculator-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
